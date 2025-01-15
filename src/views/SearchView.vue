@@ -6,7 +6,7 @@
       <p>Para que salgan los resultados debes entrar en <a href="https://cors-anywhere.herokuapp.com/corsdemo">https://cors-anywhere.herokuapp.com/corsdemo</a></p>
     </div>
   <div class="search-page">
-    <h1>Resultados del Álbum</h1>
+    <h1>Resultados del Álbum</h1>   
     <div class="album-info">
       <h2>{{ albumData.title }}</h2>
       <img :src="albumData.cover_medium" alt="Portada del álbum" />
@@ -23,7 +23,19 @@
           class="song-card"
         >
           <p><strong>{{ song.title }}</strong></p>
+          <p><strong>{{ song.id }}</strong></p>
           <audio :src="song.preview" controls></audio>
+          <input type="button" value="Agregar">
+        </div>
+      </div>
+    </div>
+
+
+    <div class="playlist">
+      <h3>Playlist</h3>
+      <div class="song-cards">
+        <div>
+          
         </div>
       </div>
     </div>
@@ -49,6 +61,8 @@
   // Llama a la función al montar el componente
   onMounted(fetchAlbumData);
   </script>
+  
+
   
   <style scoped>
   h1 {
@@ -94,6 +108,10 @@
 .song-card audio {
   margin-top: 10px;
   width: 100%;
+}
+
+.playlist{
+  margin-top: 20px;
 }
   </style>
   
