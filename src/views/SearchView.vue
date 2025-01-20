@@ -30,15 +30,6 @@
       </div>
     </div>
 
-
-    <div class="playlist">
-      <h3>Playlist</h3>
-      <div class="song-cards">
-        <div>
-          
-        </div>
-      </div>
-    </div>
   </div>
 </template>
   
