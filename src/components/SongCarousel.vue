@@ -5,7 +5,7 @@
       <div class="carousel-inner">
         <!-- Desplegar las canciones en el carrusel -->
         <div class="carousel-item" v-for="(song, index) in tracks" :key="song.id" :class="{ active: index === 0 }">
-          <img :src="song.album.cover_big" class="d-block w-100" alt="Portada del álbum">
+          <img :src="song.album.cover_xl" class="d-block w-100" alt="Portada del álbum">
           <div class="carousel-caption d-none d-md-block">
             <h5>{{ song.title }}</h5>
             <p>{{ song.artist.name }} - {{ song.album.title }}</p>
@@ -22,6 +22,25 @@
         <span class="visually-hidden">Next</span>
       </button>
     </div>
+
+
+    <!-- Grid de canciones destacadas -->
+    <div class="container mt-5">
+      <h2 class="mb-3">Canciones Destacadas</h2>
+      <div class="row row-cols-1 row-cols-md-4 g-4">
+        <div class="col" v-for="song in tracks.slice(0,8)" :key="song.id">
+          <div class="card">
+            <img :src="song.album.cover_medium" class="card-img-top" alt="Portada del álbum">
+            <div class="card-body">
+              <h5 class="card-title">{{ song.title }}</h5>
+              <p class="card-text">{{ song.artist.name }} - {{ song.album.title }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
   </div>
 </template>
 
@@ -68,5 +87,9 @@ onMounted(fetchFeaturedSongs);
 .carousel-inner img {
   max-height: 400px; /* Ajustar el tamaño de las imágenes */
   object-fit: cover; /* Asegurar que las imágenes cubren el espacio */
+}
+
+h1, h2 {
+  color: #007bff;
 }
 </style>

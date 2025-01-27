@@ -19,9 +19,16 @@
 
     <br>
 
+
     <!-- MOSTRAR CANCIONES DESTACADAS -->
     <SongCarousel />
+
+
     
+    <!-- MOSTRAR GRID DE CANCIONES DESTACADAS -->
+    
+    
+
     
     <div class="container mt-4">
       <p>Bienvenido a la aplicación Deezer Music Client.</p>
