@@ -1,24 +1,22 @@
 <template>
-  <div v-if="songs.length > 0" class="container mt-4">
-    <h2>Canciones destacadas</h2>
+  <div>
+    <!-- Carrusel de canciones -->
     <div id="songCarousel" class="carousel slide" data-bs-ride="carousel">
       <div class="carousel-inner">
-
-        <div class="carousel-item" :class="{ active: index === 0 }" v-for="(song, index) in songs" :key="song.id">
-          <img :src="song.album.cover_medium" class="d-block w-100" alt="Imagen del álbum">
+        <!-- Desplegar las canciones en el carrusel -->
+        <div class="carousel-item" v-for="(song, index) in tracks" :key="song.id" :class="{ active: index === 0 }">
+          <img :src="song.album.cover_big" class="d-block w-100" alt="Portada del álbum">
           <div class="carousel-caption d-none d-md-block">
             <h5>{{ song.title }}</h5>
-            <p>{{ song.artist.name }}</p>
+            <p>{{ song.artist.name }} - {{ song.album.title }}</p>
           </div>
         </div>
-      
       </div>
-      
+      <!-- Controles del carrusel -->
       <button class="carousel-control-prev" type="button" data-bs-target="#songCarousel" data-bs-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
         <span class="visually-hidden">Previous</span>
       </button>
-      
       <button class="carousel-control-next" type="button" data-bs-target="#songCarousel" data-bs-slide="next">
         <span class="carousel-control-next-icon" aria-hidden="true"></span>
         <span class="visually-hidden">Next</span>
@@ -28,21 +26,47 @@
 </template>
 
 <script setup>
-  defineProps({
-    songs: {
-      type: Array,
-      required: true
+import { ref, onMounted } from 'vue';
+
+const tracks = ref([]); // Estado para almacenar las canciones destacadas
+
+// Función para obtener las canciones destacadas de la API
+const fetchFeaturedSongs = async () => {
+  try {
+    const response = await fetch('https://cors-anywhere.herokuapp.com/https://api.deezer.com/chart');
+    if (!response.ok) {
+      throw new Error('Error al obtener las canciones destacadas');
     }
-  });
+    const data = await response.json();
+    tracks.value = data.tracks.data; // Guardamos los tracks en el estado
+  } catch (error) {
+    console.error(error.message);
+  }
+};
+
+// Llamar a la función para cargar las canciones cuando el componente se monta
+onMounted(fetchFeaturedSongs);
 </script>
 
 <style scoped>
-.carousel-inner img {
-  max-height: 400px;
-  object-fit: cover;
+/* Estilos para el carrusel */
+.carousel-item {
+  text-align: center;
 }
 
-.container {
-  margin-top: 20px;
+.carousel-caption {
+  background: rgba(0, 0, 0, 0.5); /* Fondo semitransparente */
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  background-color: black; /* Color de los controles */
+}
+
+.carousel-inner img {
+  max-height: 400px; /* Ajustar el tamaño de las imágenes */
+  object-fit: cover; /* Asegurar que las imágenes cubren el espacio */
 }
 </style>

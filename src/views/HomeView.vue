@@ -17,9 +17,10 @@
       </div>
     </div>
 
+    <br>
 
     <!-- MOSTRAR CANCIONES DESTACADAS -->
-    
+    <SongCarousel />
     
     
     <div class="container mt-4">
@@ -31,8 +32,9 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref } from 'vue';
 import SearchBar from '../components/SearchBar.vue'; // Componente de búsqueda
+import SongCarousel from '../components/SongCarousel.vue'; // Componente de carrusel
 import { useFavoritesStore } from '@/stores/favorites'; // Store para favoritos
 
 const songs = ref([]); // Estado para las canciones filtradas según la búsqueda
