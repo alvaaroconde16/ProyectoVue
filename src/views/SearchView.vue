@@ -43,9 +43,9 @@
     try {
       const response = await fetch('https://cors-anywhere.herokuapp.com/https://api.deezer.com/album/586206062');
       if (!response.ok) throw new Error('Error al obtener los datos');
-      albumData.value = await response.json();
+        albumData.value = await response.json();
     } catch (error) {
-      console.error('Error:', error);
+        console.error('Error:', error);
     }
   };
   
