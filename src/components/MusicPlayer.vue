@@ -2,17 +2,15 @@
     <div class="music-player">
         <!-- Información de la canción -->
         <div class="left-section">
-          <img :src="song.album?.cover_medium" alt="Portada del álbum" />
-          <div>
-            <h5>{{ song.title }}</h5>
-            <p>{{ song.artist?.name || "" }}</p>
-          </div>
-          <button class="btn btn-link ms-2" @click="toggleFavorite(song)">
-                  {{
-                    isFavorite(song.id)
-                      ? "💙"
-                      : "🤍"
-                  }}
+            <img :src="song.album?.cover_medium" alt="Portada del álbum" />
+            
+            <div>
+                <h5>{{ song.title }}</h5>
+                <p>{{ song.artist?.name || "" }}</p>
+            </div>
+            
+            <button class="btn btn-link ms-2" @click="toggleFavorite(song)">
+                <i :class="isFavorite(song.id) ? 'bi bi-heart-fill' : 'bi bi-heart'"></i>
             </button>
         </div>
   

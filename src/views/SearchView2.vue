@@ -29,11 +29,7 @@
 
               <td class="text-center">
                 <button class="btn btn-link" @click="toggleFavorite(song)">
-                  {{
-                    isFavorite(song.id)
-                      ? "💙"
-                      : "🤍"
-                  }}
+                  <i :class="isFavorite(song.id) ? 'bi bi-heart-fill' : 'bi bi-heart'"></i>
                 </button>
                 
               </td>
