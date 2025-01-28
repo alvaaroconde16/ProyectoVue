@@ -10,41 +10,41 @@
         <table class="table table-striped table-bordered">
           <thead class="table-primary">
             <tr>
-              <th scope="col">Portada</th>
-              <th scope="col">Título</th>
-              <th scope="col">Favorito</th>
-              <th scope="col">Preview</th>
-              <th scope="col">Artista</th>
-              <th scope="col">Álbum</th>
-              <th scope="col">Duración</th>
+              <th>Portada</th>
+              <th>Título</th>
+              <th>Favorito</th>
+              <th>Preview</th>
+              <th>Artista</th>
+              <th>Álbum</th>
+              <th>Duración</th>
             </tr>
           </thead>
 
           <tbody>
             <tr v-for="song in songs" :key="song.id">
               <td>
-                <img :src="song.album.cover_small" alt="Portada del álbum" class="img-thumbnail" style="width: 50px; height: 50px;"/>
+                <img :src="song.album.cover_small" alt="Portada del álbum" style="width: 50px; height: 50px;"/>
               </td>
 
               <td><strong>{{ song.title }}</strong></td>
 
-              <td>
+              <td class="text-center">
                 <button class="btn btn-link" @click="toggleFavorite(song)">
-                  {{
-                    isFavorite(song.id)
-                      ? "💙"
-                      : "🤍"
-                  }}
+                  <i :class="isFavorite(song.id) ? 'bi bi-heart-fill' : 'bi bi-heart'"></i>
                 </button>
+                
               </td>
 
-              <td>
-                <audio :src="song.preview" controls></audio>
+              <td class="text-center">
+                <button class="btn btn-link" @click="setCurrentSong(song)">
+                  <i class="bi bi-mic-fill"></i>
+                </button>
               </td>
 
               <td>{{ song.artist.name }}</td>
               <td>{{ song.album.title }}</td>
-              <td>
+
+              <td class="text-center">
                 {{ Math.floor(song.duration / 60) }}:{{ song.duration % 60 < 10 ? "0" : "" }}{{ song.duration % 60 }}
               </td>
             </tr>
@@ -57,6 +57,10 @@
 
     <!-- MOSTRAR CARRUSEL Y GRID DE CANCIONES DESTACADAS -->
     <SongCarousel />
+
+    
+    <!-- COLOCAMO AQUI EL REPRODUCTOR PARA QUE SE COLOQUE ENCIMA DE NUESTRO CARRUSEL -->
+    <MusicPlayer v-if="currentSong" :song="currentSong" />
     
     
     <div class="container mt-4">
@@ -68,31 +72,38 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
-import SearchBar from '../components/SearchBar.vue'; // Componente de búsqueda
-import SongCarousel from '../components/SongCarousel.vue'; // Componente de carrusel
-import { useFavoritesStore } from '@/stores/favorites'; // Store para favoritos
-
-const songs = ref([]); // Estado para las canciones filtradas según la búsqueda
-const favoritesStore = useFavoritesStore();
-
-
-// Función para manejar los resultados de búsqueda (solo afecta al grid)
-const handleResults = (data) => {
-  songs.value = data.slice(0,6); // Filtramos las canciones que se muestran en el grid
-};
-
-// Comprobamos si la canción está en favoritos
-const toggleFavorite = (song) => {
-  if (favoritesStore.isFavorite(song.id)) {
-    favoritesStore.removeSong(song.id);
-  } else {
-    favoritesStore.addSong(song);
-  }
-};
-
-// Función para verificar si la canción está en favoritos
-const isFavorite = (id) => favoritesStore.isFavorite(id);
+  import { ref } from 'vue';
+  import SearchBar from '../components/SearchBar.vue'; // Componente de búsqueda
+  import SongCarousel from '../components/SongCarousel.vue'; // Componente de carrusel
+  import { useFavoritesStore } from '@/stores/favorites'; // Store para favoritos
+  import MusicPlayer from "@/components/MusicPlayer.vue";
+  
+  const songs = ref([]); // Estado para las canciones filtradas según la búsqueda
+  const favoritesStore = useFavoritesStore();
+  const currentSong = ref(null); // Canción actualmente en reproducción
+  
+  // Cambiar la canción actual en el MusicPlayer
+  const setCurrentSong = (song) => {
+        currentSong.value = song; // Establece la canción seleccionada
+  };
+  
+  
+  // Función para manejar los resultados de búsqueda (solo afecta al grid)
+  const handleResults = (data) => {
+    songs.value = data.slice(0,6); // Filtramos las canciones que se muestran en el grid
+  };
+  
+  // Comprobamos si la canción está en favoritos
+  const toggleFavorite = (song) => {
+    if (favoritesStore.isFavorite(song.id)) {
+      favoritesStore.removeSong(song.id);
+    } else {
+      favoritesStore.addSong(song);
+    }
+  };
+  
+  // Función para verificar si la canción está en favoritos
+  const isFavorite = (id) => favoritesStore.isFavorite(id);
 
 </script>
 
@@ -122,5 +133,9 @@ button {
 
 button:hover {
   cursor: pointer;
+}
+
+table td {
+  vertical-align: middle;
 }
 </style>

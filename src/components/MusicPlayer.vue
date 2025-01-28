@@ -161,6 +161,14 @@
       }
     });
 
+    // Detener la música cuando el componente se desmonte
+    onUnmounted(() => {
+      if (audio.value) {
+        audio.value.pause(); // Detenemos la canción
+        audio.value.currentTime = 0; // Reseteamos el tiempo de la canción a 0
+      }
+    });
+
  </script>
   
 
