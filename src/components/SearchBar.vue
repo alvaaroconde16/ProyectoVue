@@ -1,27 +1,26 @@
 <template>
-    <div class="search-container">
-      <div class="search-input">
-        <input
-          type="text"
-          v-model="searchQuery"
-          @keyup.enter="searchDeezer"
-          placeholder="Buscar en Deezer"
-        />
-        <button @click="searchDeezer">
-          <i class="bi bi-search"></i> <!-- Ícono de búsqueda de Bootstrap -->
-        </button>
-      </div>
+  <div class="search-container">
+    <div class="search-input">
+      <input
+        type="text"
+        v-model="searchQuery"
+        @keyup.enter="searchDeezer"
+        placeholder="Buscar en Deezer"
+      />
+      <button @click="searchDeezer">
+        <i class="bi bi-search"></i> <!-- Ícono de búsqueda de Bootstrap -->
+      </button>
     </div>
-  </template>
-   <script setup>
+  </div>
+</template>
+
+  <script setup>
   import { ref } from "vue";
    const searchQuery = ref(""); // Estado reactivo para la barra de búsqueda
    // Función para realizar la búsqueda
   const searchDeezer = async () => {
     if (searchQuery.value.trim() === "") return; // Evita búsquedas vacías
-    const url = `https://cors-anywhere.herokuapp.com/https://api.deezer.com/search?q=${encodeURIComponent(
-      searchQuery.value
-    )}`;
+    const url = `https://cors-anywhere.herokuapp.com/https://api.deezer.com/search?q=${encodeURIComponent(searchQuery.value)}`;
     try {
       const response = await fetch(url);
       if (!response.ok) {
@@ -36,6 +35,8 @@
    // Define la función para emitir eventos
   const emit = defineEmits(["results"]);
   </script>
+
+  
   <style scoped>
   .search-container {
     display: flex;

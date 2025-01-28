@@ -21,11 +21,11 @@
             <li class="nav-item">
               <router-link class="nav-link" to="/playlists">Playlists</router-link>
             </li>
-            <li class="nav-item">
+            <!--<li class="nav-item">
               <router-link class="nav-link" to="/search">Buscador</router-link>
-            </li>
+            </li>-->
             <li class="nav-item">
-              <router-link class="nav-link" to="/search2">Buscador2</router-link>
+              <router-link class="nav-link" to="/search2">Buscador</router-link>
             </li>
           </ul>
         </div>

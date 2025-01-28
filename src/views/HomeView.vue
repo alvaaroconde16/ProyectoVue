@@ -1,6 +1,7 @@
 <template>
   <div>
     <h1>Búsqueda de canciones en Deezer</h1>
+
     <!-- Componente SearchBar para búsqueda (solo afecta al grid, no al carrusel) -->
     <SearchBar @results="handleResults" />
 
@@ -20,15 +21,9 @@
     <br>
 
 
-    <!-- MOSTRAR CANCIONES DESTACADAS -->
+    <!-- MOSTRAR CARRUSEL Y GRID DE CANCIONES DESTACADAS -->
     <SongCarousel />
-
-
     
-    <!-- MOSTRAR GRID DE CANCIONES DESTACADAS -->
-    
-    
-
     
     <div class="container mt-4">
       <p>Bienvenido a la aplicación Deezer Music Client.</p>

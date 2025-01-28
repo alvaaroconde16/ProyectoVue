@@ -1,9 +1,3 @@
-<script setup>
-import { RouterLink, RouterView } from 'vue-router'
-import Menu from "./components/menu.vue";
-
-</script>
-
 <template>
   <div id="app">
     <!-- Header -->
@@ -28,8 +22,10 @@ import Menu from "./components/menu.vue";
   </div>
 </template>
 
-<script setup>
 
+<script setup>
+  import { RouterLink, RouterView } from 'vue-router'
+  import Menu from "./components/menu.vue";
 </script>
 
 
