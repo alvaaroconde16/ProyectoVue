@@ -5,18 +5,52 @@
     <!-- Componente SearchBar para búsqueda (solo afecta al grid, no al carrusel) -->
     <SearchBar @results="handleResults" />
 
-     <!-- MOSTRAR CANCIONES AL HACER LA BÚSQUEDA -->
-    <div class="song-cards" v-if="songs.length > 0">
-      <div v-for="song in songs" :key="song.id">
-        <img :src="song.album.cover_small" alt="Porta del álbum">  <strong>{{ song.title }}</strong> - <button @click="toggleFavorite(song)">
-              {{
-                isFavorite(song.id)
-                  ? "💙"
-                  : "🤍"
-              }}
-            </button> - <audio :src="song.preview" controls></audio> - {{ song.artist.name }} - {{ song.album.title }} - {{ Math.floor(song.duration / 60) }}:{{ song.duration % 60 < 10 ? "0" : "" }}{{ song.duration % 60 }}
+     <!-- Tabla de canciones -->
+     <div class="table-responsive mt-4" v-if="songs.length > 0">
+        <table class="table table-striped table-bordered">
+          <thead class="table-primary">
+            <tr>
+              <th scope="col">Portada</th>
+              <th scope="col">Título</th>
+              <th scope="col">Favorito</th>
+              <th scope="col">Preview</th>
+              <th scope="col">Artista</th>
+              <th scope="col">Álbum</th>
+              <th scope="col">Duración</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr v-for="song in songs" :key="song.id">
+              <td>
+                <img :src="song.album.cover_small" alt="Portada del álbum" class="img-thumbnail" style="width: 50px; height: 50px;"/>
+              </td>
+
+              <td><strong>{{ song.title }}</strong></td>
+
+              <td>
+                <button class="btn btn-link" @click="toggleFavorite(song)">
+                  {{
+                    isFavorite(song.id)
+                      ? "💙"
+                      : "🤍"
+                  }}
+                </button>
+              </td>
+
+              <td>
+                <audio :src="song.preview" controls></audio>
+              </td>
+
+              <td>{{ song.artist.name }}</td>
+              <td>{{ song.album.title }}</td>
+              <td>
+                {{ Math.floor(song.duration / 60) }}:{{ song.duration % 60 < 10 ? "0" : "" }}{{ song.duration % 60 }}
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
-    </div>
 
     <br>
 
