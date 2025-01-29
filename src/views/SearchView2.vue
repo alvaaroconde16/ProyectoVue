@@ -21,7 +21,7 @@
 
           <tbody>
             <tr v-for="song in songs" :key="song.id">
-              <td>
+              <td class="text-center">
                 <img :src="song.album.cover_small" alt="Portada del álbum" style="width: 50px; height: 50px;"/>
               </td>
 
