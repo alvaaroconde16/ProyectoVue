@@ -36,7 +36,7 @@
 
               <td class="text-center">
                 <button class="btn btn-link" @click="setCurrentSong(song)">
-                  <i class="bi bi-mic-fill"></i>
+                  <i class="bi bi-play-circle"></i>
                 </button>
               </td>
 
