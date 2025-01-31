@@ -59,7 +59,7 @@
     <SongCarousel />
 
     
-    <!-- COLOCAMO AQUI EL REPRODUCTOR PARA QUE SE COLOQUE ENCIMA DE NUESTRO CARRUSEL -->
+    <!-- COLOCAMOS AQUI EL REPRODUCTOR PARA QUE SE COLOQUE ENCIMA DE NUESTRO CARRUSEL -->
     <MusicPlayer v-if="currentSong" :song="currentSong" />
     
     
