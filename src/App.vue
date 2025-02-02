@@ -15,6 +15,10 @@
       <router-view />
     </main>
 
+
+    <!-- Reproducto de música -->
+    <MusicPlayer />
+
     <!-- Footer -->
     <footer class="bg-dark text-white text-center py-3">
       <p>&copy; 2024 Deezer Music Client. Todos los derechos reservados.</p>
@@ -24,8 +28,10 @@
 
 
 <script setup>
+  import { ref } from 'vue';
   import { RouterLink, RouterView } from 'vue-router'
   import Menu from "./components/menu.vue";
+  import MusicPlayer from "./components/MusicPlayer.vue";
 </script>
 
 

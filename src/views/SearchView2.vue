@@ -69,17 +69,16 @@
     const songs = ref([]); // Estado para almacenar la lista de canciones
     const favoritesStore = useFavoritesStore();
     const currentSong = ref(null); // Canción actualmente en reproducción
-     
+   
+
+    const setCurrentSong = (song) => {
+      musicStore.setCurrentSong(song);  // Cambia la canción en el reproductor global
+    };
+
 
     // Maneja los resultados emitidos por el componente hijo
     const handleResults = (data) => {
       songs.value = data; // Actualiza la lista de canciones
-    };
-
-
-    // Cambiar la canción actual en el MusicPlayer
-    const setCurrentSong = (song) => {
-      currentSong.value = song; // Establece la canción seleccionada
     };
 
 

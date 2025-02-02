@@ -60,7 +60,7 @@
 
     
     <!-- COLOCAMOS AQUI EL REPRODUCTOR PARA QUE SE COLOQUE ENCIMA DE NUESTRO CARRUSEL -->
-    <MusicPlayer v-if="currentSong" :song="currentSong" />
+    <!-- <MusicPlayer :song="currentSong" /> -->
     
     
     <div class="container mt-4">
@@ -76,15 +76,23 @@
   import SearchBar from '../components/SearchBar.vue'; // Componente de búsqueda
   import SongCarousel from '../components/SongCarousel.vue'; // Componente de carrusel
   import { useFavoritesStore } from '@/stores/favorites'; // Store para favoritos
-  import MusicPlayer from "@/components/MusicPlayer.vue";
+  //import MusicPlayer from "@/components/MusicPlayer.vue";
+  import { useMusicStore } from "@/stores/music";
   
   const songs = ref([]); // Estado para las canciones filtradas según la búsqueda
   const favoritesStore = useFavoritesStore();
-  const currentSong = ref(null); // Canción actualmente en reproducción
+  //const currentSong = ref(null); // Canción actualmente en reproducción
   
   // Cambiar la canción actual en el MusicPlayer
+  //const setCurrentSong = (song) => {
+  //  currentSong.value = song; // Establece la canción seleccionada
+  //};
+
+
+  const musicStore = useMusicStore();
+
   const setCurrentSong = (song) => {
-        currentSong.value = song; // Establece la canción seleccionada
+    musicStore.setCurrentSong(song);
   };
   
   
