@@ -1,37 +1,73 @@
 <template>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <div class="container">
-        
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarNav"
-          aria-controls="navbarNav"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav">
-            <li class="nav-item">
-              <router-link class="nav-link" to="/">Home</router-link>
-            </li>
-            <li class="nav-item">
-              <router-link class="nav-link" to="/playlists">Playlists</router-link>
-            </li>
-            <!--<li class="nav-item">
-              <router-link class="nav-link" to="/search">Buscador</router-link>
-            </li>-->
-            <li class="nav-item">
-              <router-link class="nav-link" to="/search2">Buscador</router-link>
-            </li>
-          </ul>
-        </div>
+  <nav class="navbar navbar-expand-lg shadow-sm">
+    <div class="container">
+      <!-- LOGO -->
+      <router-link class="navbar-brand fw-bold" to="/">
+        MusicApp
+      </router-link>
+
+      <!-- Contenedor flex para centrar la barra de búsqueda -->
+      <div class="search-container mx-auto">
+        <SearchBar @results="handleResults" />
       </div>
-    </nav>
+
+      <!-- Menú de navegación -->
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <ul class="navbar-nav gap-3">
+          <li class="nav-item">
+            <router-link class="nav-link" to="/">Home</router-link>
+          </li>
+          <li class="nav-item">
+            <router-link class="nav-link" to="/playlists">Playlists</router-link>
+          </li>
+          <li class="nav-item">
+            <router-link class="nav-link" to="/search2">Buscador</router-link>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
 </template>
+
 <script setup>
-import { RouterLink } from 'vue-router'
+import { RouterLink } from "vue-router";
+import SearchBar from "./SearchBar.vue";
 </script>
+
+<style scoped>
+.navbar {
+  background-color: white;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Contenedor para centrar la barra de búsqueda */
+.search-container {
+  flex-grow: 1;
+  max-width: 400px;
+}
+
+/* Estilo de los enlaces del menú */
+.navbar-nav .nav-link {
+  font-size: 1.1rem;
+  transition: transform 0.3s ease, color 0.3s ease;
+  color: black;
+}
+
+/* Hover en los enlaces */
+.navbar-nav .nav-link:hover {
+  transform: scale(1.1);
+  border-bottom: 2px solid black;
+}
+
+/* Logo del menú */
+.navbar-brand {
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  background: linear-gradient(135deg, #ff6f61, #d147a3, #1e90ff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+</style>

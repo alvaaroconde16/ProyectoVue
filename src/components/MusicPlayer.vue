@@ -4,12 +4,12 @@
       <div class="left-section">
           <img :src="song?.album?.cover_medium || 'https://static.vecteezy.com/system/resources/thumbnails/009/393/830/small/black-vinyl-disc-record-for-music-album-cover-design-free-png.png'" alt="Portada del álbum" />
           
-          <div>
+          <div class="song-info">
               <h5>{{ song?.title || '' }}</h5>
               <p>{{ song?.artist?.name || '' }}</p>
           </div>
           
-          <button v-if="song" class="btn btn-link ms-2" @click="toggleFavorite(song)">
+          <button v-if="song" class="btn-favorite" @click="toggleFavorite(song)">
               <i :class="isFavorite(song?.id) ? 'bi bi-heart-fill' : 'bi bi-heart'"></i>
           </button>
       </div>
@@ -17,26 +17,25 @@
       <!-- Controles de reproducción -->
       <div class="center-section">
           <div class="controls">
-            <button @click="seekBackward">
-              <i class="bi bi-skip-start-fill"></i> <!-- Icono de retroceder -->
+            <button @click="seekBackward" class="control-btn">
+              <i class="bi bi-skip-start-fill"></i>
             </button>
 
-            <button @click="togglePlayback">
+            <button @click="togglePlayback" class="control-btn">
               <i :class="isPlaying ? 'bi bi-pause-fill' : 'bi bi-play-fill'"></i>
             </button>
 
-            <!-- Botón de adelantar -->
-            <button @click="seekForward">
-              <i class="bi bi-skip-end-fill"></i> <!-- Icono de adelantar -->
+            <button @click="seekForward" class="control-btn">
+              <i class="bi bi-skip-end-fill"></i>
             </button>
           </div>
       
           <!-- Barra de progreso -->
-          <input type="range" min="0" :max="duration" step="0.1" v-model="currentTime" @input="seek"/>
+          <input type="range" min="0" :max="duration" step="0.1" v-model="currentTime" @input="seek" class="progress-bar" />
       </div>
 
       <!-- Control de volumen -->
-      <div class="right-section me-4">
+      <div class="right-section">
           <i class="bi bi-volume-up me-3"></i>
           <input type="range" min="0" max="1" step="0.01" v-model="volume" @input="updateVolume" class="volume-slider" />
       </div>
@@ -145,37 +144,53 @@ if (audio.value) {
 .music-player {
   position: fixed;
   bottom: 0;
-  left: 0;
   width: 100%;
-  background-color: #222;
+  background-color: #2f2f2f;
   color: white;
   display: flex;
   align-items: center;
   padding: 12px 20px;
-  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.3);
 }
 
 .left-section {
   display: flex;
   align-items: center;
-}
-
-.left-section img {
-  height: 60px;
-  object-fit: cover;
-  border-radius: 5px;
   margin-right: 15px;
 }
 
-.left-section h5 {
-  margin: 0;
-  font-size: 16px;
+.left-section img {
+  height: 70px;
+  object-fit: cover;
+  border-radius: 10px;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
 }
 
-.left-section p {
-  margin: 0;
+.song-info {
+  margin-left: 15px;
+}
+
+.song-info h5 {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.song-info p {
   font-size: 14px;
-  color: #bbb;
+  color: #b0b0b0;
+}
+
+.btn-favorite {
+  background: none;
+  border: none;
+  color: #ff6f61;
+  font-size: 20px;
+  transition: color 0.3s ease;
+  margin-left: 15px;
+}
+
+.btn-favorite:hover {
+  color: #ff3838;
 }
 
 .center-section {
@@ -183,24 +198,25 @@ if (audio.value) {
   text-align: center;
 }
 
-.center-section input[type="range"] {
-  width: 60%;
-}
-
 .controls button {
   background: none;
   border: none;
   color: white;
-  font-size: 25px;
+  font-size: 30px;
   cursor: pointer;
+  transition: transform 0.2s ease, color 0.3s ease;
 }
 
 .controls button:hover {
-  color: #ccc;
+  color: #ff6f61;
+  transform: scale(1.1);
 }
 
-.volume-slider {
-  width: 100px;
+.progress-bar {
+  width: 55%;
+  margin: 10px auto;
+  height: 7px;
+  border-radius: 5px;
 }
 
 .right-section {
@@ -209,6 +225,12 @@ if (audio.value) {
 }
 
 .right-section i {
-  font-size: 20px;
+  font-size: 22px;
+}
+
+.volume-slider {
+  width: 100px;
+  height: 5px;
+  margin-left: 5px;
 }
 </style>

@@ -5,7 +5,7 @@
         type="text"
         v-model="searchQuery"
         @keyup.enter="searchDeezer"
-        placeholder="Buscar en Deezer"
+        placeholder="¿Qué quieres reproducir?"
       />
       <button @click="searchDeezer">
         <i class="bi bi-search"></i> <!-- Ícono de búsqueda de Bootstrap -->
@@ -41,7 +41,7 @@
   .search-container {
     display: flex;
     justify-content: center;
-    margin: 20px 0;
+    margin: 6px 0;
   }
    .search-input {
     width: 90%;

@@ -1,58 +1,76 @@
 <template>
   <div id="app">
-    <!-- Header -->
-    <header class="bg-primary text-white py-3">
+    <!-- HEADER -->
+    <header class="header">
       <div class="container text-center">
-        <h1>Deezer Music Client</h1>
+        <h1 class="text-white">Deezer Music Client</h1>
       </div>
     </header>
 
-    <!-- Menu -->
+    <!-- MENÚ MODERNO -->
     <Menu />
 
-    <!-- Main Content -->
-    <main class="container my-4">
+    <!-- CONTENIDO PRINCIPAL -->
+    <main class="main-content">
       <router-view />
     </main>
 
-
-    <!-- Reproducto de música -->
+    <!-- REPRODUCTOR DE MÚSICA -->
     <MusicPlayer />
 
-    <!-- Footer -->
-    <footer class="bg-dark text-white text-center py-3">
-      <p>&copy; 2024 Deezer Music Client. Todos los derechos reservados.</p>
+    <!-- FOOTER -->
+    <footer class="footer">
+      <p>&copy; 2024 Deezer Music Client</p>
     </footer>
   </div>
 </template>
 
-
 <script setup>
-  import { ref } from 'vue';
-  import { RouterLink, RouterView } from 'vue-router'
-  import Menu from "./components/menu.vue";
-  import MusicPlayer from "./components/MusicPlayer.vue";
+import Menu from "./components/menu.vue";
+import MusicPlayer from "./components/MusicPlayer.vue";
 </script>
 
-
 <style lang="scss">
-nav{
-  border: 1px solid gray;
+/* ====== VARIABLES ====== */
+$primary-color: #ff6f61;
+$secondary-color: #282c34;
+$blue-color: #1e90ff;  /* Azul brillante */
+$text-color: #ffffff;
+
+/* ====== ESTILOS GENERALES ====== */
+body {
+  background: linear-gradient(180deg, #f8f9fa, #e9ecef);
+  color: #222;
+  font-family: "Poppins", sans-serif;
+  margin: 0;
+  padding: 0;
 }
-$hover-bg-color: #007bff;
-$hover-text-color: #ffffff;
-li {
-    padding: 0.5rem 1rem;
-    cursor: pointer;
-    transition: background-color 0.3s, color 0.3s;
 
-    &:hover {
-      background-color: $hover-bg-color;
-      color: $hover-text-color;
-      font-weight: bold;
-    }
+/* ====== HEADER MODERNO ====== */
+.header {
+  background: linear-gradient(105deg, #ff6f61, #d147a3, #1e90ff);
+  padding: 1.5rem 0;
+  text-align: center;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+  color: white;
+}
 
-  }
+.header h1 {
+  font-size: 2rem;
+  font-weight: bold;
+}
 
+/* ====== CONTENIDO PRINCIPAL ====== */
+.main-content {
+  margin: auto;
+}
 
+/* ====== FOOTER ESTILIZADO ====== */
+.footer {
+  background: rgba(255, 255, 255, 0.1);
+  text-align: center;
+  padding: 1rem 0;
+  margin-top: 2rem;
+  font-size: 0.9rem;
+}
 </style>
