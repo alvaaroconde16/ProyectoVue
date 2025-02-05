@@ -40,7 +40,7 @@
   </template>
 
   <script setup>
-    import { ref } from "vue";
+    import { ref, onMounted, watch } from "vue";
     import SearchBar from "../components/SearchBar.vue"; // Importa el componente hijo
     import { useFavoritesStore } from '@/stores/favorites';
     import { useMusicStore } from "@/stores/music";
@@ -49,16 +49,15 @@
     const favoritesStore = useFavoritesStore();
     const musicStore = useMusicStore();
 
+
     const setCurrentSong = (song) => {
       musicStore.setCurrentSong(song);
     };
-
 
     // Maneja los resultados emitidos por el componente hijo
     const handleResults = (data) => {
       songs.value = data; // Actualiza la lista de canciones
     };
-
 
     //Comprobamos si la canción la tenemos en favoritos
     const toggleFavorite = (song) => {

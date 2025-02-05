@@ -4,6 +4,7 @@ import HomeView from '../views/HomeView.vue';
 import PlaylistsView from '../views/PlaylistsView.vue';
 import SearchView from '../views/SearchView.vue';
 import SearchView2 from '../views/SearchView2.vue';
+import ArtistCard from '@/components/ArtistCard.vue';
 
 const routes = [
   {

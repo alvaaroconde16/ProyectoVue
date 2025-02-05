@@ -14,13 +14,17 @@
   </div>
 </template>
 
-  <script setup>
+<script setup>
   import { ref } from "vue";
-   const searchQuery = ref(""); // Estado reactivo para la barra de búsqueda
-   // Función para realizar la búsqueda
+  import { useRouter } from "vue-router"; // ✅ Importamos Vue Router
+
+  const searchQuery = ref(""); // Estado reactivo para la barra de búsqueda
+  const router = useRouter(); // ✅ Obtenemos el enrutador
+ 
+  // Función para realizar la búsqueda
   const searchDeezer = async () => {
     if (searchQuery.value.trim() === "") return; // Evita búsquedas vacías
-    const url = `https://cors-anywhere.herokuapp.com/https://api.deezer.com/search?q=${encodeURIComponent(searchQuery.value)}`;
+      const url = `http://localhost:8080/https://api.deezer.com/search?q=${encodeURIComponent(searchQuery.value)}`;
     try {
       const response = await fetch(url);
       if (!response.ok) {
@@ -32,12 +36,13 @@
       console.error(error.message);
     }
   };
-   // Define la función para emitir eventos
+
+  // Define la función para emitir eventos
   const emit = defineEmits(["results"]);
-  </script>
+</script>
 
   
-  <style scoped>
+<style scoped>
   .search-container {
     display: flex;
     justify-content: center;
@@ -72,4 +77,4 @@
    .search-input button:hover {
     color: #000;
   }
-  </style> 
+</style> 

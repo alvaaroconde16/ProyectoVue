@@ -18,10 +18,7 @@
     <!-- REPRODUCTOR DE MÚSICA -->
     <MusicPlayer />
 
-    <!-- FOOTER -->
-    <footer class="footer">
-      <p>&copy; 2024 Deezer Music Client</p>
-    </footer>
+   
   </div>
 </template>
 

@@ -1,5 +1,6 @@
 <template>
   <div>
+    <h2 class="text-center my-5">Canciones populares</h2>
     <!-- Carrusel de canciones -->
     <div id="songCarousel" class="carousel slide my-5" data-bs-ride="carousel">
       <div class="carousel-inner">
@@ -35,7 +36,7 @@ const tracks = ref([]); // Estado para almacenar las canciones destacadas
 // Función para obtener las canciones destacadas de la API
 const fetchFeaturedSongs = async () => {
   try {
-    const response = await fetch('https://cors-anywhere.herokuapp.com/https://api.deezer.com/chart');
+    const response = await fetch('http://localhost:8080/https://api.deezer.com/chart');
     if (!response.ok) {
       throw new Error('Error al obtener las canciones destacadas');
     }
@@ -75,86 +76,7 @@ onMounted(fetchFeaturedSongs);
   max-height: 400px; /* Ajustar el tamaño de las imágenes */
   object-fit: cover;
 }
-
-/* ====== Estilos del Grid de Canciones ====== */
-.container {
-  max-width: 1200px;
-}
-
-.row-cols-md-4 {
-  margin-top: 2rem;
-}
-
-/* Estilo de las tarjetas */
-.card-modern {
-  border-radius: 15px;
-  overflow: hidden;
-  background-color: #222; /* Fondo oscuro para que resalten las imágenes */
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-  transition: transform 0.3s ease, box-shadow 0.3s ease, filter 0.3s ease;
-  position: relative;
-}
-
-.card-modern:hover {
-  transform: translateY(-5px); /* Efecto sutil de elevación */
-  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.4);
-  filter: brightness(1.1); /* Aumentamos el brillo al pasar el ratón */
-}
-
-.card-img-top {
-  border-bottom: 3px solid #1e90ff; /* Línea color moderna */
-  border-radius: 10px 10px 0 0; /* Bordes redondeados en la imagen */
-  object-fit: cover;
-  transition: transform 0.4s ease; /* Efecto de zoom */
-}
-
-.card-modern:hover .card-img-top {
-  transform: scale(1.05); /* Zoom sutil al pasar el ratón sobre la imagen */
-}
-
-.card-body {
-  padding: 1.5rem;
-  text-align: center;
-}
-
-.card-title {
-  font-size: 1.2rem;
-  font-weight: 600;
-  color: #fff;
-  margin-bottom: 0.5rem;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  transition: color 0.3s ease;
-}
-
-.card-title:hover {
-  color: #ff6f61; /* Color para el título cuando pasa el ratón */
-}
-
-.card-text {
-  font-size: 0.9rem;
-  color: #b0b0b0;
-  font-weight: 500;
-  margin-top: 0.5rem;
-}
-
-/* Estilo de los encabezados */
 h2 {
-  color: #ff6f61;
-  font-size: 2rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  margin-bottom: 2rem;
-}
-
-/* Espaciado entre las tarjetas */
-.row-cols-1 {
-  margin-bottom: 2rem;
-}
-
-@media (max-width: 768px) {
-  .card-modern {
-    margin-bottom: 2rem;
-  }
+  color: #1e90ff;
 }
 </style>

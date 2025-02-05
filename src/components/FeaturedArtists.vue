@@ -2,10 +2,9 @@
     <div class="container mt-5">
       <h2 class="mb-5 text-center">Artistas Destacados</h2>
       <div class="row row-cols-2 row-cols-md-4 row-cols-lg-5 g-5 justify-content-center">
-        <div class="col text-center" v-for="artist in artists.slice(0, 8)" :key="artist.id">
+        <div class="col text-center" v-for="artist in artists.slice(0, 5)" :key="artist.id">
           <div class="artist-container">
-            <img :src="artist.picture_xl" class="artist-img" :alt="artist.name" />
-            <p class="artist-name">{{ artist.name }}</p>
+            <ArtistCard :artist="artist" />
           </div>
         </div>
       </div>
@@ -14,13 +13,14 @@
   
   <script setup>
   import { ref, onMounted } from "vue";
+  import ArtistCard from "./ArtistCard.vue";
   
   const artists = ref([]);
   
   // Obtener artistas destacados de Deezer
   const fetchFeaturedArtists = async () => {
     try {
-      const response = await fetch("https://cors-anywhere.herokuapp.com/https://api.deezer.com/chart");
+      const response = await fetch("http://localhost:8080/https://api.deezer.com/chart");
       if (!response.ok) throw new Error("Error al obtener los artistas destacados");
       
       const data = await response.json();

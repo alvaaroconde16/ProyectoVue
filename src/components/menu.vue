@@ -7,9 +7,9 @@
       </router-link>
 
       <!-- Contenedor flex para centrar la barra de búsqueda -->
-      <div class="search-container mx-auto">
-        <SearchBar @results="handleResults" />
-      </div>
+      <!-- <div class="search-container mx-auto"> -->
+        <!-- <SearchBar/> -->
+      <!-- </div> -->
 
       <!-- Menú de navegación -->
       <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
@@ -30,8 +30,9 @@
 </template>
 
 <script setup>
-import { RouterLink } from "vue-router";
-import SearchBar from "./SearchBar.vue";
+  import { RouterLink } from "vue-router";
+  import SearchBar from "./SearchBar.vue";
+  
 </script>
 
 <style scoped>

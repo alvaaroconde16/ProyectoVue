@@ -1,74 +1,48 @@
+<!-- ArtistCard.vue -->
 <template>
-    <div class="artist-card">
-      <!-- Imagen del artista -->
-      <img :src="artist?.picture_medium || ''" alt="Imagen del artista" class="artist-image" />
-  
-      <!-- Información del artista -->
-      <div class="artist-info">
-        <h5>{{ artist?.name || 'Nombre del Artista' }}</h5>
-        <p>{{ artist?.nb_album || 0 }} álbumes</p>
-      </div>
-  
-      <!-- Botón opcional para más detalles -->
-      <button class="btn btn-link" @click="handleClick">
-        <i class="bi bi-person-circle"></i> Ver más
-      </button>
-    </div>
-  </template>
-  
-  <script setup>
-  import { ref } from "vue";
-  
-  // Recibir la información del artista como prop
-  const props = defineProps({
-    artist: {
-      type: Object,
-      required: true
-    }
-  });
-  
-  // Función que se ejecuta al hacer click en el botón (puedes redirigir a detalles del artista o hacer algo más)
-  const handleClick = () => {
-    console.log("Ver detalles del artista:", props.artist);
-  };
-  </script>
-  
-  <style scoped>
-  .artist-card {
-    background-color: #333;
-    color: white;
-    padding: 10px;
-    border-radius: 10px;
-    text-align: center;
-    max-width: 200px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
-  }
-  
-  .artist-image {
-    width: 100%;
-    height: auto;
-    border-radius: 50%;
-    margin-bottom: 10px;
-  }
-  
-  .artist-info h5 {
-    font-size: 16px;
-    margin: 0;
-  }
-  
-  .artist-info p {
-    font-size: 14px;
-    color: #bbb;
-  }
-  
-  .btn {
-    color: #fff;
-    font-size: 24px;
-    cursor: pointer;
-  }
-  
-  .btn:hover {
-    color: #ccc;
-  }
-  </style>
-  
+  <div class="artist-card">
+    <img :src="artist.picture_xl" class="artist-img" :alt="artist.name" />
+    <p class="artist-name">{{ artist.name }}</p>
+  </div>
+</template>
+
+<script setup>
+import { defineProps } from 'vue';
+
+// Definimos las props que recibirá este componente
+const props = defineProps({
+  artist: Object // Recibe un objeto que contiene los datos del artista
+});
+</script>
+
+<style scoped>
+.artist-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 0;
+  margin: 0;
+}
+
+.artist-img {
+  width: 230px;
+  height: 230px;
+  border-radius: 50%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.artist-img:hover {
+  transform: scale(1.1);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+.artist-name {
+  margin-top: 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #333;
+}
+</style>

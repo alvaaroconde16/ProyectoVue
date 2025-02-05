@@ -149,7 +149,7 @@ if (audio.value) {
   color: white;
   display: flex;
   align-items: center;
-  padding: 12px 20px;
+  padding: 8px 20px;
   box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.3);
 }
 
@@ -160,24 +160,26 @@ if (audio.value) {
 }
 
 .left-section img {
-  height: 70px;
+  height: 60px;
   object-fit: cover;
   border-radius: 10px;
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
 }
 
 .song-info {
-  margin-left: 15px;
+  margin-left: 17px;
+  align-items: center;
 }
 
 .song-info h5 {
-  font-size: 18px;
+  font-size: 17px;
   font-weight: bold;
 }
 
 .song-info p {
   font-size: 14px;
   color: #b0b0b0;
+  margin: 0;
 }
 
 .btn-favorite {
@@ -204,7 +206,7 @@ if (audio.value) {
   color: white;
   font-size: 30px;
   cursor: pointer;
-  transition: transform 0.2s ease, color 0.3s ease;
+  transition: transform 0.1s ease, color 0.2s ease;
 }
 
 .controls button:hover {
@@ -232,5 +234,6 @@ if (audio.value) {
   width: 100px;
   height: 5px;
   margin-left: 5px;
+  margin-right: 10px;
 }
 </style>
