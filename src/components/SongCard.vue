@@ -26,7 +26,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
 import { useFavoritesStore } from '@/stores/favorites';
 import { useMusicStore } from "@/stores/music";
 
@@ -39,7 +39,7 @@ const favoritesStore = useFavoritesStore();
 const musicStore = useMusicStore();
 
 // Estado para comprobar si la canción es favorita
-const isFavorite = ref(favoritesStore.isFavorite(props.song.id));
+const isFavorite = computed(() => favoritesStore.isFavorite(props.song.id));
 
 // Función para cambiar el estado de favorito
 const toggleFavorite = () => {
