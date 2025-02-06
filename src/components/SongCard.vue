@@ -38,7 +38,7 @@ const props = defineProps({
 const favoritesStore = useFavoritesStore();
 const musicStore = useMusicStore();
 
-// Estado para comprobar si la canción es favorita
+// Estado para comprobar si la canción es favorita. Uso computed para que se actualice automáticamente
 const isFavorite = computed(() => favoritesStore.isFavorite(props.song.id));
 
 // Función para cambiar el estado de favorito
