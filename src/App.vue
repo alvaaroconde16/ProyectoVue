@@ -18,6 +18,11 @@
     <!-- REPRODUCTOR DE MÚSICA -->
     <MusicPlayer />
 
+    <footer>
+      <div class="footer mt-5">
+        <p>Desarrollado por Álvaro Conde con Vue 3 y Bootstrap 5</p>
+      </div>
+    </footer>
    
   </div>
 </template>
