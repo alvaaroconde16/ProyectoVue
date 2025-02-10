@@ -2,7 +2,7 @@
   <div class="artist-card-container container">
 
     <!-- Información del artista -->
-    <div class="artist-header d-flex align-items-center gap-4">
+    <div class="artist-header d-flex align-items-center gap-4 mt-3">
       <img :src="artist.picture_medium" alt="Artist image" class="artist-image" />
       <div class="artist-info">
         <h1>{{ artist.name }}</h1>
@@ -21,16 +21,9 @@
 
     <!-- Álbumes del artista -->
     <div class="albums-section mt-5">
-      <h2>Álbumes</h2>
-      <div class="row row-cols-1 row-cols-md-4 g-4">
-        <div class="col" v-for="album in albums.splice(0,8)" :key="album.id">
-          <div class="card">
-            <img :src="album.cover_medium" class="card-img-top" :alt="album.title" />
-            <div class="card-body">
-              <h5 class="card-title">{{ album.title }}</h5>
-            </div>
-          </div>
-        </div>
+      <h2 class="mb-4">Álbumes</h2>
+      <div class="row row-cols-1 row-cols-md-4 g-5 justify-content-center">
+        <AlbumCard v-for="album in albums.slice(0,8)" :key="album.id" :album="album" />
       </div>
     </div>
 
@@ -41,11 +34,10 @@
 <script setup>
 import { ref, onMounted } from "vue";
 import { useRoute } from "vue-router";
-import { useMusicStore } from "@/stores/music";
 import SongCard from "@/components/SongCard.vue";  // Asegúrate de importar el componente
+import AlbumCard from "@/components/AlbumCard.vue";  // Asegúrate de importar el componente
 
 const route = useRoute();
-const musicStore = useMusicStore();
 const artist = ref({});
 const albums = ref([]);
 const topSongs = ref([]);

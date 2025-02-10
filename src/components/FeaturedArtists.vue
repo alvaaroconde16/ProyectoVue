@@ -2,10 +2,10 @@
     <div class="container mt-5">
       <h2 class="mb-5 text-center">Artistas Destacados</h2>
       <div class="row row-cols-2 row-cols-md-4 row-cols-lg-5 g-5 justify-content-center">
-        <div class="col text-center" v-for="artist in artists.slice(0, 5)" :key="artist.id">
+        <div class="col text-center" v-for="artist in artists.slice(0, 10)" :key="artist.id">
           <div class="artist-container">
             <RouterLink :to="'/artist/' + artist.id" class="artist-link">
-              <div class="artist-card">
+              <div class="artist-card d-flex flex-column align-items-center">
                 <img :src="artist.picture_xl" class="artist-img" :alt="artist.name" />
                 <p class="artist-name">{{ artist.name }}</p>
               </div>
@@ -18,13 +18,6 @@
   
   <script setup>
   import { ref, onMounted } from "vue";
-  // import ArtistCard from "./ArtistCard.vue";
-  // import { defineProps } from 'vue';
-
-  // Definimos las props que recibirá este componente
-  // const props = defineProps({
-    // artist: Object // Recibe un objeto que contiene los datos del artista
-  // });
   
   const artists = ref([]);
   
@@ -45,14 +38,6 @@
   </script>
   
   <style scoped>
-  .artist-card {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    padding: 0;
-    margin: 0;
-  }
 
   .artist-img {
     width: 230px;
