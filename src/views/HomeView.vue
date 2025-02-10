@@ -24,8 +24,6 @@
 import { ref } from 'vue';
 import SongCarousel from '../components/SongCarousel.vue';
 import FeaturedArtists from '../components/FeaturedArtists.vue';
-import { useFavoritesStore } from '@/stores/favorites';
-import { useMusicStore } from "@/stores/music";
 import SearchBar from '../components/SearchBar.vue';
 import SongCard from '@/components/SongCard.vue';
 
@@ -46,17 +44,5 @@ h1 {
 
 .list-group-item {
   transition: all 0.2s ease-in-out;
-}
-
-.list-group-item:hover {
-  background-color: #f8f9fa;
-}
-
-button {
-  transition: all 0.2s ease-in-out;
-}
-
-button:hover {
-  transform: scale(1.1);
 }
 </style>

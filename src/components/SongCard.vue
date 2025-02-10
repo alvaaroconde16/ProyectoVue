@@ -1,36 +1,35 @@
-<!-- SongCard.vue -->
 <template>
-  <div class="list-group-item d-flex align-items-center justify-content-between">
-
+  <div class="song-card d-flex align-items-center">
     <!-- Portada del álbum -->
-    <img :src="song.album.cover_big" alt="Portada" class="rounded me-3" style="width: 50px; height: 50px; object-fit: cover;"/>
+    <div class="album-cover">
+      <img :src="song.album.cover_big" alt="Portada" class="cover-img" />
+      <button class="play-btn d-flex justify-content-center" @click="setCurrentSong">
+        <i class="bi bi-play-fill"></i>
+      </button>
+    </div>
 
     <!-- Información de la canción -->
-    <div class="flex-grow-1">
-      <h5 class="mb-0">{{ song.title }}
-        <span class="text-muted small ms-2">{{ Math.floor(song.duration / 60) }}:{{ song.duration % 60 < 10 ? "0" : "" }}{{ song.duration % 60 }}</span>
+    <div class="song-info flex-grow-1">
+      <h5 class="song-title">
+        {{ song.title }}
+        <span class="duration">{{ Math.floor(song.duration / 60) }}:{{ song.duration % 60 < 10 ? "0" : "" }}{{ song.duration % 60 }}</span>
       </h5>
-      <p class="text-muted mb-0">{{ song.artist.name }} • {{ song.album.title }}</p>
+      <p class="song-details">{{ song.artist.name }} • {{ song.album.title }}</p>
     </div>
 
     <!-- Botón de favoritos -->
-    <button class="btn btn-outline-danger me-2" @click="toggleFavorite">
-      <i :class="isFavorite ? 'bi bi-heart-fill' : 'bi bi-heart'"></i>
-    </button>
-
-    <!-- Botón de reproducción -->
-    <button class="btn btn-primary" @click="setCurrentSong">
-      <i class="bi bi-play-circle"></i>
+    <button class="fav-btn" @click="toggleFavorite">
+      <i :class="isFavorite ? 'bi bi-heart-fill active' : 'bi bi-heart'"></i>
     </button>
   </div>
 </template>
 
 <script setup>
-import { computed, ref } from 'vue';
+import { computed } from 'vue';
 import { useFavoritesStore } from '@/stores/favorites';
 import { useMusicStore } from "@/stores/music";
 
-// Propiedad 'song' que recibe la canción que se va a mostrar
+// Recibe la canción como prop
 const props = defineProps({
   song: Object
 });
@@ -38,25 +37,102 @@ const props = defineProps({
 const favoritesStore = useFavoritesStore();
 const musicStore = useMusicStore();
 
-// Estado para comprobar si la canción es favorita. Uso computed para que se actualice automáticamente
+// Estado para saber si la canción es favorita
 const isFavorite = computed(() => favoritesStore.isFavorite(props.song.id));
 
-// Función para cambiar el estado de favorito
+// Función para alternar favorito
 const toggleFavorite = () => {
-  if (isFavorite.value) {
-    favoritesStore.removeSong(props.song.id);
-  } else {
-    favoritesStore.addSong(props.song);
-  }
-  isFavorite.value = !isFavorite.value;
+  isFavorite.value
+    ? favoritesStore.removeSong(props.song.id)
+    : favoritesStore.addSong(props.song);
 };
 
-// Función para reproducir la canción seleccionada
+// Función para reproducir la canción
 const setCurrentSong = () => {
   musicStore.setCurrentSong(props.song);
 };
 </script>
 
 <style scoped>
-/* Puedes agregar estilos aquí si es necesario */
+/* Contenedor principal */
+.song-card {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border-radius: 12px;
+  position: relative;
+}
+
+.song-card:hover {
+  background: #c7c7c7;
+}
+
+/* Portada del álbum */
+.album-cover {
+  position: relative;
+  width: 55px;
+  height: 55px;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.cover-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Botón de reproducción */
+.play-btn {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(255, 255, 255, 0.8);
+  border: none;
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.album-cover:hover .play-btn {
+  opacity: 1;
+}
+
+.play-btn i {
+  font-size: 20px;
+  color: #000;
+}
+
+/* Información de la canción */
+.song-info {
+  margin-left: 15px;
+}
+
+.song-title {
+  font-size: 16px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.duration {
+  font-size: 14px;
+  margin-left: 10px;
+}
+
+.song-details {
+  font-size: 14px;
+  margin: 3px 0 0;
+}
+
+/* Botón de favoritos */
+.fav-btn {
+  background: none;
+  border: none;
+  color: #ff6b81;
+  font-size: 22px;
+  transition: color 0.3s;
+}
 </style>

@@ -5,10 +5,7 @@
 
     <div class="card-body">
       <!-- Título del álbum -->
-      <h5 class="card-title">{{ album.title }}</h5>
-
-      <!-- Nombre del artista -->
-      <p class="card-text text-muted">{{ album.name }}</p>
+      <h5 class="card-title mt-1">{{ album.title }}</h5>
       
     </div>
   </div>
@@ -19,7 +16,7 @@
 
   // Propiedad 'album' que recibe la información del álbum
   const props = defineProps({
-    album: Object
+    album: Object,
   });
 </script>
 

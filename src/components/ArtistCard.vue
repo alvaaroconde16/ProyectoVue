@@ -22,7 +22,7 @@
     <!-- Álbumes del artista -->
     <div class="albums-section mt-5">
       <h2 class="mb-4">Álbumes</h2>
-      <div class="row row-cols-1 row-cols-md-4 g-5 justify-content-center">
+      <div class="row row-cols-1 row-cols-md-5 g-4">
         <AlbumCard v-for="album in albums.slice(0,8)" :key="album.id" :album="album" />
       </div>
     </div>
@@ -52,8 +52,8 @@ const fetchArtistInfo = async (id) => {
   try {
     const artistRes = await fetch(`http://localhost:8080/https://api.deezer.com/artist/${id}`);
     const artistData = await artistRes.json();
-    artist.value = artistData;
-
+    artist.value = artistData;  // Guardamos el artista
+    
     const albumsRes = await fetch(`http://localhost:8080/https://api.deezer.com/artist/${id}/albums`);
     const albumsData = await albumsRes.json();
     albums.value = albumsData.data;
@@ -61,6 +61,7 @@ const fetchArtistInfo = async (id) => {
     const tracksRes = await fetch(`http://localhost:8080/https://api.deezer.com/artist/${id}/top?limit=5`);
     const tracksData = await tracksRes.json();
     topSongs.value = tracksData.data;
+
   } catch (error) {
     console.error("Error fetching artist data:", error);
   }
