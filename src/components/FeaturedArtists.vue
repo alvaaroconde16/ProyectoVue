@@ -4,7 +4,12 @@
       <div class="row row-cols-2 row-cols-md-4 row-cols-lg-5 g-5 justify-content-center">
         <div class="col text-center" v-for="artist in artists.slice(0, 5)" :key="artist.id">
           <div class="artist-container">
-            <ArtistCard :artist="artist" />
+            <RouterLink :to="'/artist/' + artist.id" class="artist-link">
+              <div class="artist-card">
+                <img :src="artist.picture_xl" class="artist-img" :alt="artist.name" />
+                <p class="artist-name">{{ artist.name }}</p>
+              </div>
+            </RouterLink>
           </div>
         </div>
       </div>
@@ -13,7 +18,13 @@
   
   <script setup>
   import { ref, onMounted } from "vue";
-  import ArtistCard from "./ArtistCard.vue";
+  // import ArtistCard from "./ArtistCard.vue";
+  // import { defineProps } from 'vue';
+
+  // Definimos las props que recibirá este componente
+  // const props = defineProps({
+    // artist: Object // Recibe un objeto que contiene los datos del artista
+  // });
   
   const artists = ref([]);
   
@@ -34,8 +45,7 @@
   </script>
   
   <style scoped>
-  /* Contenedor del artista */
-  .artist-container {
+  .artist-card {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -43,8 +53,7 @@
     padding: 0;
     margin: 0;
   }
-  
-  /* Imagen redonda */
+
   .artist-img {
     width: 230px;
     height: 230px;
@@ -53,14 +62,12 @@
     transition: transform 0.3s ease;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
   }
-  
-  /* Efecto hover en la imagen */
+
   .artist-img:hover {
     transform: scale(1.1);
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
   }
-  
-  /* Nombre del artista */
+
   .artist-name {
     margin-top: 10px;
     font-size: 1rem;

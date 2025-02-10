@@ -1,48 +1,89 @@
-<!-- ArtistCard.vue -->
 <template>
-  <div class="artist-card">
-    <img :src="artist.picture_xl" class="artist-img" :alt="artist.name" />
-    <p class="artist-name">{{ artist.name }}</p>
+  <div class="artist-card-container container">
+
+    <!-- Información del artista -->
+    <div class="artist-header d-flex align-items-center gap-4">
+      <img :src="artist.picture_medium" alt="Artist image" class="artist-image" />
+      <div class="artist-info">
+        <h1>{{ artist.name }}</h1>
+        <p class="text-secondary">{{ artist.nb_fan }} fans</p>
+      </div>
+    </div>
+
+    <!-- Canciones Populares -->
+    <div class="songs-section mt-5">
+      <h2>Canciones Populares</h2>
+      <!-- Usamos el componente SongCard para las canciones -->
+      <div class="list-group my-4" v-if="topSongs.length > 0">
+        <SongCard v-for="song in topSongs" :key="song.id" :song="song" />
+      </div>
+    </div>
+
+    <!-- Álbumes del artista -->
+    <div class="albums-section mt-5">
+      <h2>Álbumes</h2>
+      <div class="row row-cols-1 row-cols-md-4 g-4">
+        <div class="col" v-for="album in albums.splice(0,8)" :key="album.id">
+          <div class="card">
+            <img :src="album.cover_medium" class="card-img-top" :alt="album.title" />
+            <div class="card-body">
+              <h5 class="card-title">{{ album.title }}</h5>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </div>
 </template>
 
-<script setup>
-import { defineProps } from 'vue';
 
-// Definimos las props que recibirá este componente
-const props = defineProps({
-  artist: Object // Recibe un objeto que contiene los datos del artista
+<script setup>
+import { ref, onMounted } from "vue";
+import { useRoute } from "vue-router";
+import { useMusicStore } from "@/stores/music";
+import SongCard from "@/components/SongCard.vue";  // Asegúrate de importar el componente
+
+const route = useRoute();
+const musicStore = useMusicStore();
+const artist = ref({});
+const albums = ref([]);
+const topSongs = ref([]);
+
+// Cargar información del artista al montar el componente
+onMounted(async () => {
+  const artistId = route.params.id;
+  await fetchArtistInfo(artistId);
 });
+
+const fetchArtistInfo = async (id) => {
+  try {
+    const artistRes = await fetch(`http://localhost:8080/https://api.deezer.com/artist/${id}`);
+    const artistData = await artistRes.json();
+    artist.value = artistData;
+
+    const albumsRes = await fetch(`http://localhost:8080/https://api.deezer.com/artist/${id}/albums`);
+    const albumsData = await albumsRes.json();
+    albums.value = albumsData.data;
+
+    const tracksRes = await fetch(`http://localhost:8080/https://api.deezer.com/artist/${id}/top?limit=5`);
+    const tracksData = await tracksRes.json();
+    topSongs.value = tracksData.data;
+  } catch (error) {
+    console.error("Error fetching artist data:", error);
+  }
+};
 </script>
 
+
 <style scoped>
-.artist-card {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  padding: 0;
-  margin: 0;
+.artist-card-container {
+  padding: 20px;
+  border-radius: 10px;
 }
 
-.artist-img {
-  width: 230px;
-  height: 230px;
+.artist-image {
   border-radius: 50%;
   object-fit: cover;
-  transition: transform 0.3s ease;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-}
-
-.artist-img:hover {
-  transform: scale(1.1);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
-}
-
-.artist-name {
-  margin-top: 10px;
-  font-size: 1rem;
-  font-weight: 600;
-  color: #333;
 }
 </style>

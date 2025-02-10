@@ -30,26 +30,11 @@ import SearchBar from '../components/SearchBar.vue';
 import SongCard from '@/components/SongCard.vue';
 
 const songs = ref([]); 
-const favoritesStore = useFavoritesStore();
-const musicStore = useMusicStore();
-
-const setCurrentSong = (song) => {
-  musicStore.setCurrentSong(song);
-};
 
 const handleResults = (data) => {
   songs.value = data.slice(0, 10); // Mostramos hasta 10 resultados
 };
 
-const toggleFavorite = (song) => {
-  if (favoritesStore.isFavorite(song.id)) {
-    favoritesStore.removeSong(song.id);
-  } else {
-    favoritesStore.addSong(song);
-  }
-};
-
-const isFavorite = (id) => favoritesStore.isFavorite(id);
 </script>
 
 <style scoped>

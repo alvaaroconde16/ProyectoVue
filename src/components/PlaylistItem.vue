@@ -47,10 +47,10 @@
     }
 
     .album-cover {
-      width: 50px;
-      height: 50px;
+      width: 60px;
+      height: 60px;
       border-radius: 5px;
-      margin-right: 10px;
+      margin-right: 15px;
     }
 
     .song-info {

@@ -3,7 +3,7 @@
   <div class="list-group-item d-flex align-items-center justify-content-between">
 
     <!-- Portada del álbum -->
-    <img :src="song.album.cover_small" alt="Portada" class="rounded me-3" style="width: 50px; height: 50px; object-fit: cover;"/>
+    <img :src="song.album.cover_big" alt="Portada" class="rounded me-3" style="width: 50px; height: 50px; object-fit: cover;"/>
 
     <!-- Información de la canción -->
     <div class="flex-grow-1">

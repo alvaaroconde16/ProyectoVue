@@ -27,6 +27,11 @@ const routes = [
     name: 'Buscador2',
     component: SearchView2,
   },
+  {
+    path: '/artist/:id',
+    name: 'ArtistCard',
+    component: ArtistCard,
+  }
 ];
 
 const router = createRouter({
