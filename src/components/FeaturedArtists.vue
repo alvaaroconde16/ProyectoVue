@@ -4,7 +4,7 @@
 
     <!-- Contenedor con scroll horizontal -->
     <div class="overflow-x-auto">
-      <div class="d-flex pt-3 gap-4">
+      <div class="d-flex pt-3 ms-3 gap-4">
         <div class="text-center" v-for="artist in artists.slice(0, 10)" :key="artist.id">
           <div class="artist-container">
             <RouterLink :to="'/artist/' + artist.id" class="artist-link">

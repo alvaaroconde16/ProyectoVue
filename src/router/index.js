@@ -5,6 +5,7 @@ import PlaylistsView from '../views/PlaylistsView.vue';
 import SearchView from '../views/SearchView.vue';
 import SearchView2 from '../views/SearchView2.vue';
 import ArtistCard from '@/components/ArtistCard.vue';
+import InfoView from '@/views/InfoView.vue';
 
 const routes = [
   {
@@ -29,8 +30,8 @@ const routes = [
   },
   {
     path: '/artist/:id',
-    name: 'ArtistCard',
-    component: ArtistCard,
+    name: 'InfoView',
+    component: InfoView,
   }
 ];
 

@@ -16,10 +16,10 @@
 
 <script setup>
   import { ref } from "vue";
-  import { useRouter } from "vue-router"; // ✅ Importamos Vue Router
+  import { useRouter } from "vue-router"; // Importamos Vue Router
 
   const searchQuery = ref(""); // Estado reactivo para la barra de búsqueda
-  const router = useRouter(); // ✅ Obtenemos el enrutador
+  const router = useRouter(); // Obtenemos el enrutador
  
   // Función para realizar la búsqueda
   const searchDeezer = async () => {

@@ -17,16 +17,14 @@
     <div class="songs">
       <h3>Canciones</h3>
       <div class="song-cards">
-        <div
-          v-for="song in albumData.tracks?.data"
-          :key="song.id"
-          class="song-card"
-        >
+
+        <div v-for="song in albumData.tracks?.data" :key="song.id" class="song-card" >
           <p><strong>{{ song.title }}</strong></p>
           <p><strong>{{ song.id }}</strong></p>
           <audio :src="song.preview" controls></audio>
           <input type="button" value="Agregar">
         </div>
+      
       </div>
     </div>
 
@@ -41,7 +39,7 @@
   // Función para obtener datos del álbum desde la API de Deezer
   const fetchAlbumData = async () => {
     try {
-      const response = await fetch('https://cors-anywhere.herokuapp.com/https://api.deezer.com/album/586206062');
+      const response = await fetch('https://localhost:8080/https://api.deezer.com/album/586206062');
       if (!response.ok) throw new Error('Error al obtener los datos');
         albumData.value = await response.json();
     } catch (error) {
@@ -53,7 +51,6 @@
   onMounted(fetchAlbumData);
   </script>
   
-
   
   <style scoped>
   h1 {

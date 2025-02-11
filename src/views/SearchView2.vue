@@ -4,12 +4,17 @@
       <!-- Componente hijo -->
       <SearchBar @results="handleResults" />
 
+
+      <!-- Resultados de la búsqueda -->
+      <SearchResults :results="searchResults" />
+
+
       <!-- Lista de canciones -->
-      <div class="list-group my-4" v-if="songs.length > 0">
-        <div class="list-group-item d-flex align-items-center justify-content-between" v-for="song in songs" :key="song.id">
-          <SongCard :song="song" />
-        </div>
-      </div>
+      <!-- <div class="list-group my-4" v-if="songs.length > 0"> -->
+        <!-- <div class="list-group-item d-flex align-items-center justify-content-between" v-for="song in songs" :key="song.id"> -->
+          <!-- <SongCard :song="song" /> -->
+        <!-- </div> -->
+      <!-- </div> -->
     </div>
 
     <!-- <p class="mt-5"> -->
@@ -24,11 +29,14 @@
     import SearchBar from "../components/SearchBar.vue"; // Importa el componente hijo
     import { useFavoritesStore } from '@/stores/favorites';
     import { useMusicStore } from "@/stores/music";
-    import SongCard from '@/components/SongCard.vue';
+    // import SongCard from '@/components/SongCard.vue';
+    import SearchResults from '@/components/SearchResults.vue';
 
-    const songs = ref([]); // Estado para almacenar la lista de canciones
+    // const songs = ref([]); // Estado para almacenar la lista de canciones
     const favoritesStore = useFavoritesStore();
     const musicStore = useMusicStore();
+
+    const searchResults = ref([]); // Estado para almacenar los resultados de la búsqueda
 
 
     const setCurrentSong = (song) => {
@@ -37,7 +45,7 @@
 
     // Maneja los resultados emitidos por el componente hijo
     const handleResults = (data) => {
-      songs.value = data; // Actualiza la lista de canciones
+      searchResults.value = data; // Actualiza la lista de canciones
     };
 
     //Comprobamos si la canción la tenemos en favoritos
