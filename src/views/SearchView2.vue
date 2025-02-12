@@ -27,37 +27,14 @@
   <script setup>
     import { ref, onMounted, watch } from "vue";
     import SearchBar from "../components/SearchBar.vue"; // Importa el componente hijo
-    import { useFavoritesStore } from '@/stores/favorites';
-    import { useMusicStore } from "@/stores/music";
-    // import SongCard from '@/components/SongCard.vue';
     import SearchResults from '@/components/SearchResults.vue';
-
-    // const songs = ref([]); // Estado para almacenar la lista de canciones
-    const favoritesStore = useFavoritesStore();
-    const musicStore = useMusicStore();
-
+    
     const searchResults = ref([]); // Estado para almacenar los resultados de la búsqueda
-
-
-    const setCurrentSong = (song) => {
-      musicStore.setCurrentSong(song);
-    };
 
     // Maneja los resultados emitidos por el componente hijo
     const handleResults = (data) => {
       searchResults.value = data; // Actualiza la lista de canciones
     };
-
-    //Comprobamos si la canción la tenemos en favoritos
-    const toggleFavorite = (song) => {
-      if (favoritesStore.isFavorite(song.id)) {
-        favoritesStore.removeSong(song.id);
-      } else {
-        favoritesStore.addSong(song);
-      }
-    };
-
-    const isFavorite = (id) => favoritesStore.isFavorite(id);
   </script>
 
 <style scoped>

@@ -1,13 +1,15 @@
 <template>
   <div class="artist-card card">
     <!-- Imagen del artista -->
-    <img :src="artist.picture_medium" class="card-img-top artist-image" :alt="artist.name" />
-
-    <div class="card-body">
-      <!-- Nombre del artista -->
-      <h5 class="card-title mt-1">{{ artist.name }}</h5>
-      <p class="text-muted">{{ artist.nb_album }} Álbumes</p>
-    </div>
+    <RouterLink :to="'/artist/' + artist.id" class="artist-link">
+      <img :src="artist.picture_medium" class="card-img-top artist-image" :alt="artist.name" />
+      
+      <div class="card-body">
+        <!-- Nombre del artista -->
+          <h5 class="card-title mt-1">{{ artist.name }}</h5>
+          <p class="text-muted">{{ artist.nb_album }} Álbumes</p>
+      </div>
+  </RouterLink>
   </div>
 </template>
 
@@ -28,8 +30,8 @@
 }
 
 .artist-image {
-  border-radius: 10px;
-  height: 200px;
+  border-radius: 50%;
+  height: auto;
   object-fit: cover;
 }
 
@@ -40,6 +42,7 @@
 }
 
 .card-body {
+  text-align: center;
   padding: 15px;
 }
 </style>

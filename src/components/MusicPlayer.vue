@@ -149,7 +149,7 @@ if (audio.value) {
   color: white;
   display: flex;
   align-items: center;
-  padding: 8px 20px;
+  padding: 0 20px;
   box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.3);
 }
 
@@ -160,7 +160,7 @@ if (audio.value) {
 }
 
 .left-section img {
-  height: 60px;
+  height: 50px;
   object-fit: cover;
   border-radius: 10px;
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
@@ -215,7 +215,7 @@ if (audio.value) {
 }
 
 .progress-bar {
-  width: 55%;
+  width: 40%;
   margin: 10px auto;
   height: 7px;
   border-radius: 5px;

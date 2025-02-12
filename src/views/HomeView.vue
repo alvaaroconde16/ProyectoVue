@@ -37,7 +37,7 @@ import SearchResults from '@/components/SearchResults.vue';
 const searchResults = ref([]);
 
 const handleResults = (data) => {
-  searchResults.value = data.slice(0, 12); // Mostramos hasta 10 resultados
+  searchResults.value = data; // Mostramos hasta 10 resultados
 };
 
 </script>

@@ -24,22 +24,33 @@
   // Función para realizar la búsqueda
   const searchDeezer = async () => {
     if (searchQuery.value.trim() === "") return; // Evita búsquedas vacías
-      const url = `http://localhost:8080/https://api.deezer.com/search?q=${encodeURIComponent(searchQuery.value)}`;
+
     try {
-      const response = await fetch(url);
-      if (!response.ok) {
-        throw new Error("Error al buscar en Deezer");
-      }
-      const data = await response.json();
-      emit("results", data.data); // Emitimos los resultados al componente padre
+      // Hacemos tres búsquedas en paralelo con Promise.all (canciones, álbumes y artistas)
+      const [tracksRes, albumsRes, artistsRes] = await Promise.all([
+        fetch(`http://localhost:8080/https://api.deezer.com/search/track?q=${encodeURIComponent(searchQuery.value)}`).then(res => res.json()),
+        fetch(`http://localhost:8080/https://api.deezer.com/search/album?q=${encodeURIComponent(searchQuery.value)}`).then(res => res.json()),
+        fetch(`http://localhost:8080/https://api.deezer.com/search/artist?q=${encodeURIComponent(searchQuery.value)}`).then(res => res.json())
+      ]);
+
+      // Emitimos los resultados, combinando los tres tipos
+      const results = [
+        ...tracksRes.data.slice(0,18).map(item => ({ ...item, type: "track" })),
+        ...albumsRes.data.slice(0,5).map(item => ({ ...item, type: "album" })),
+        ...artistsRes.data.slice(0,5).map(item => ({ ...item, type: "artist" }))
+      ];
+
+      emit("results", results); // Emitimos los resultados al componente padre
+
     } catch (error) {
-      console.error(error.message);
+      console.error("Error al buscar en Deezer:", error);
     }
   };
 
   // Define la función para emitir eventos
   const emit = defineEmits(["results"]);
 </script>
+
 
   
 <style scoped>

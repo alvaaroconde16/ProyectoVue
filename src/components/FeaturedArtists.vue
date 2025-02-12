@@ -61,6 +61,7 @@ onMounted(fetchFeaturedArtists);
   font-size: 1rem;
   font-weight: 600;
   color: #333;
+  text-decoration: none;
 }
 
 h2 {

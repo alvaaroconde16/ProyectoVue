@@ -3,36 +3,36 @@
       <!-- Resultados de canciones -->
       <div v-if="songs.length">
         <h3>Canciones</h3>
-        <div class="results-list">
+        <div class="results-list song-list">
           <div v-for="song in songs" :key="song.id">
             <SongCard :song="song" />
           </div>
         </div>
       </div>
-  
-      <!-- Resultados de álbumes -->
-      <div v-if="albums.length">
-        <h3>Álbumes</h3>
-        <div class="results-list">
-          <div v-for="album in albums" :key="album.id">
-            <AlbumCard :album="album" />
-          </div>
-        </div>
-      </div>
-  
+
       <!-- Resultados de artistas -->
       <div v-if="artists.length">
-        <h3>Artistas</h3>
-        <div class="results-list">
+        <h3 class="mt-5 mb-4">Artistas</h3>
+        <div class="results-list artist-list">
           <div v-for="artist in artists" :key="artist.id">
             <ArtistCard :artist="artist" />
           </div>
         </div>
       </div>
     </div>
+  
+      <!-- Resultados de álbumes -->
+      <div v-if="albums.length">
+        <h3 class="mb-4">Álbumes</h3>
+        <div class="results-list album-list">
+          <div v-for="album in albums" :key="album.id">
+            <AlbumCard :album="album" />
+          </div>
+        </div>
+      </div>
   </template>
   
-  <script setup>
+<script setup>
   import { defineProps, ref, computed } from 'vue';
   import SongCard from './SongCard.vue';
   import AlbumCard from './AlbumCard.vue';
@@ -47,20 +47,28 @@
   const songs = computed(() => props.results.filter(item => item.type === 'track'));
   const albums = computed(() => props.results.filter(item => item.type === 'album'));
   const artists = computed(() => props.results.filter(item => item.type === 'artist'));
+</script>
   
-  // Si quisieras enlazar cada resultado a su página de detalles (InfoView),
-  // puedes hacer uso del enrutador de Vue Router.
-  </script>
-  
-  <style scoped>
+<style scoped>
   .search-results {
     margin-top: 20px;
   }
   
   .results-list {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
     gap: 20px;
+  }
+
+  .song-list {
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  }
+
+  .album-list {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  }
+
+  .artist-list {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   }
   
   h3 {
@@ -71,5 +79,5 @@
   .card {
     cursor: pointer;
   }
-  </style>
+</style>
   

@@ -13,6 +13,7 @@
 
 <script setup>
   import { defineProps } from "vue";
+import SongCard from "./SongCard.vue";
 
   // Propiedad 'album' que recibe la información del álbum
   const props = defineProps({
