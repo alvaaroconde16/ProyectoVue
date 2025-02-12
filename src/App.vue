@@ -41,11 +41,16 @@ $text-color: #ffffff;
 
 /* ====== ESTILOS GENERALES ====== */
 body {
-  background: linear-gradient(180deg, #f8f9fa, #e9ecef);
-  color: #222;
+  // background: linear-gradient(180deg, #f8f9fa, #e9ecef);
+  // color: #222;
+  color: #f8f9fa;
   font-family: "Poppins", sans-serif;
   margin: 0;
   padding: 0;
+}
+
+#app {
+  background-color: #1f1f1f;
 }
 
 /* ====== HEADER MODERNO ====== */

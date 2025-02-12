@@ -1,6 +1,6 @@
 <template>
   <div class="container mt-5">
-    <h2 class="mb-4 text-center">Artistas Destacados</h2>
+    <h3 class="mb-4">Artistas Destacados</h3>
 
     <!-- Contenedor con scroll horizontal -->
     <div class="overflow-x-auto">
@@ -56,16 +56,22 @@ onMounted(fetchFeaturedArtists);
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
 }
 
+.artist-link {
+  text-decoration: none;
+}
+
 .artist-name {
   margin-top: 10px;
   font-size: 1rem;
   font-weight: 600;
-  color: #333;
+  /* color: #333; */
+  color: white;
   text-decoration: none;
 }
 
-h2 {
-  color: #1e90ff;
+h3 {
+  /* color: #1e90ff; */
+  color: white;
 }
 
 /* Hacer scroll horizontal al contenedor */

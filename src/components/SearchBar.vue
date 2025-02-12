@@ -1,12 +1,7 @@
 <template>
   <div class="search-container">
     <div class="search-input">
-      <input
-        type="text"
-        v-model="searchQuery"
-        @keyup.enter="searchDeezer"
-        placeholder="¿Qué quieres reproducir?"
-      />
+      <input type="text" v-model="searchQuery" @keyup.enter="searchDeezer" placeholder="¿Qué quieres reproducir?" />
       <button @click="searchDeezer">
         <i class="bi bi-search"></i> <!-- Ícono de búsqueda de Bootstrap -->
       </button>
@@ -60,14 +55,13 @@
     margin: 6px 0;
   }
    .search-input {
-    width: 90%;
+    width: 100%;
     max-width: 600px; /* Opcional: limitar el ancho máximo */
     display: flex;
     align-items: center;
-    border: 1px solid #ccc;
+    border: 1px solid #363636;
     border-radius: 5px;
-    background-color: #fff;
-    padding: 0;
+    background-color: #1f1f1f;
   }
    .search-input input {
     flex: 1;
@@ -76,13 +70,15 @@
     padding: 10px;
     font-size: 16px;
     border-radius: 5px 0 0 5px;
+    background-color: #1f1f1f;
+    color: white;
   }
    .search-input button {
     border: none;
     background-color: transparent;
     padding: 0 10px;
     cursor: pointer;
-    color: #777;
+    color: #ff6b81;
     font-size: 20px;
   }
    .search-input button:hover {

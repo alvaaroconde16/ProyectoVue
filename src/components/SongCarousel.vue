@@ -1,6 +1,5 @@
 <template>
   <div>
-    <h2 class="text-center my-5">Canciones populares</h2>
     <!-- Carrusel de canciones -->
     <div id="songCarousel" class="carousel slide my-5" data-bs-ride="carousel">
       <div class="carousel-inner">
@@ -77,6 +76,7 @@ onMounted(fetchFeaturedSongs);
   object-fit: cover;
 }
 h2 {
-  color: #1e90ff;
+  /* color: #1e90ff; */
+  color: white;
 }
 </style>

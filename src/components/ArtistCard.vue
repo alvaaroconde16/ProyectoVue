@@ -7,7 +7,7 @@
       <div class="card-body">
         <!-- Nombre del artista -->
           <h5 class="card-title mt-1">{{ artist.name }}</h5>
-          <p class="text-muted">{{ artist.nb_album }} Álbumes</p>
+          <p class="text-secondary">{{ artist.nb_fan }} fans</p>
       </div>
   </RouterLink>
   </div>
@@ -27,6 +27,12 @@
   border-radius: 10px;
   background-color: transparent;
   border: 0;
+  color: white;
+}
+
+.artist-link {
+  text-decoration: none;
+  color: inherit;
 }
 
 .artist-image {
@@ -36,9 +42,8 @@
 }
 
 .card-title {
-  font-size: 1.25rem;
-  font-weight: bold;
   margin-top: 15px;
+  font-size: 18px;
 }
 
 .card-body {

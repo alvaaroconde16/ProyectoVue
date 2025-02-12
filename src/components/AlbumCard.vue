@@ -1,19 +1,17 @@
 <template>
-  <div class="album-card card">
+  <div class="album-card">
     <!-- Carátula del álbum -->
     <img :src="album.cover_medium" class="card-img-top album-image" :alt="album.title" />
 
     <div class="card-body">
       <!-- Título del álbum -->
       <h5 class="card-title mt-1">{{ album.title }}</h5>
-      
     </div>
   </div>
 </template>
 
 <script setup>
   import { defineProps } from "vue";
-import SongCard from "./SongCard.vue";
 
   // Propiedad 'album' que recibe la información del álbum
   const props = defineProps({
@@ -23,14 +21,13 @@ import SongCard from "./SongCard.vue";
 
 <style scoped>
 .album-card {
-  border-radius: 10px;
   background-color: transparent;
   border: 0;
+  color: white;
 }
 
 .card-title {
-  font-size: 1.25rem;
-  font-weight: bold;
+  font-size: 18px;
   margin-top: 15px;
 }
 </style>

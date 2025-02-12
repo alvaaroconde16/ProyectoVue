@@ -1,5 +1,5 @@
 <template>
-  <div class="music-player">
+  <div class="music-player d-flex">
       <!-- Información de la canción -->
       <div class="left-section">
           <img :src="song?.album?.cover_medium || 'https://static.vecteezy.com/system/resources/thumbnails/009/393/830/small/black-vinyl-disc-record-for-music-album-cover-design-free-png.png'" alt="Portada del álbum" />
@@ -145,20 +145,23 @@ if (audio.value) {
   position: fixed;
   bottom: 0;
   width: 100%;
-  background-color: #2f2f2f;
+  background-color: #2b2b2b;
   color: white;
   display: flex;
   align-items: center;
-  padding: 0 20px;
+  justify-content: space-between; /* Espacio uniforme entre las secciones */
+  padding: 2px 20px;
   box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.3);
 }
 
+/* Sección izquierda con tamaño fijo */
 .left-section {
   display: flex;
   align-items: center;
-  margin-right: 15px;
+  width: 200px; /* Tamaño fijo para que no se mueva */
 }
 
+/* Imagen del álbum */
 .left-section img {
   height: 50px;
   object-fit: cover;
@@ -169,6 +172,7 @@ if (audio.value) {
 .song-info {
   margin-left: 17px;
   align-items: center;
+  white-space: nowrap; /* Evita que el texto salte a otra línea */
 }
 
 .song-info h5 {
@@ -182,6 +186,7 @@ if (audio.value) {
   margin: 0;
 }
 
+/* Botón de favoritos */
 .btn-favorite {
   background: none;
   border: none;
@@ -195,9 +200,21 @@ if (audio.value) {
   color: #ff3838;
 }
 
+/* Sección central ocupa todo el espacio disponible */
 .center-section {
   flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   text-align: center;
+}
+
+/* Botones de control */
+.controls {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
 }
 
 .controls button {
@@ -214,16 +231,20 @@ if (audio.value) {
   transform: scale(1.1);
 }
 
+/* Barra de progreso siempre centrada */
 .progress-bar {
   width: 40%;
   margin: 10px auto;
-  height: 7px;
+  height: 6px;
   border-radius: 5px;
 }
 
+/* Sección derecha con tamaño fijo */
 .right-section {
   display: flex;
   align-items: center;
+  width: 200px; /* Tamaño fijo */
+  justify-content: flex-end; /* Para que el volumen se quede a la derecha */
 }
 
 .right-section i {
@@ -236,5 +257,6 @@ if (audio.value) {
   margin-left: 5px;
   margin-right: 10px;
 }
+
 
 </style>

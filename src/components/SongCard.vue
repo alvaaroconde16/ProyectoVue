@@ -14,7 +14,7 @@
         {{ song.title }}
         <span class="duration">{{ Math.floor(song.duration / 60) }}:{{ song.duration % 60 < 10 ? "0" : "" }}{{ song.duration % 60 }}</span>
       </h5>
-      <p class="song-details">{{ song.artist.name }} • {{ song.album.title }}</p>
+      <p class="song-details text-secondary">{{ song.artist.name }} • {{ song.album.title }}</p>
     </div>
 
     <!-- Botón de favoritos -->
@@ -59,12 +59,14 @@ const setCurrentSong = () => {
   display: flex;
   align-items: center;
   padding: 10px;
-  border-radius: 12px;
+  /* border-radius: 12px; */
   position: relative;
+  border-top: 1px solid #363636;
+  color: white;
 }
 
 .song-card:hover {
-  background: #dddddd;
+  background: #363636;
 }
 
 /* Portada del álbum */
@@ -112,8 +114,7 @@ const setCurrentSong = () => {
 }
 
 .song-title {
-  font-size: 16px;
-  font-weight: bold;
+  font-size: 15px;
   margin: 0;
 }
 

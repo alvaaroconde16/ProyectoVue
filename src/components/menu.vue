@@ -32,13 +32,12 @@
 <script setup>
   import { RouterLink } from "vue-router";
   import SearchBar from "./SearchBar.vue";
-  
 </script>
 
 <style scoped>
 .navbar {
-  background-color: white;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  background-color: #262626;
 }
 
 /* Contenedor para centrar la barra de búsqueda */
@@ -51,13 +50,13 @@
 .navbar-nav .nav-link {
   font-size: 1.1rem;
   transition: transform 0.3s ease, color 0.3s ease;
-  color: black;
+  color: white;
 }
 
 /* Hover en los enlaces */
 .navbar-nav .nav-link:hover {
   transform: scale(1.1);
-  border-bottom: 2px solid black;
+  border-bottom: 2px solid white;
 }
 
 /* Logo del menú */

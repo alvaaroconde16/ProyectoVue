@@ -16,12 +16,15 @@
       </div>
     </div>  -->
 
-    <!-- Grid de artistas destacados -->
-    <FeaturedArtists />
-
     <!-- Carrusel de canciones destacadas -->
     <SongCarousel />
 
+    <!-- Grid de artistas destacados -->
+    <FeaturedArtists />
+
+    <!-- Grid de álbunes populares -->
+    <PopularAlbums />
+    
   </div>
 </template>
 
@@ -31,6 +34,7 @@ import SongCarousel from '../components/SongCarousel.vue';
 import FeaturedArtists from '../components/FeaturedArtists.vue';
 import SearchBar from '../components/SearchBar.vue';
 import SearchResults from '@/components/SearchResults.vue';
+import PopularAlbums from '@/components/PopularAlbums.vue';
 // import SongCard from '@/components/SongCard.vue';
 
 // const songs = ref([]); 

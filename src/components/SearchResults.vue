@@ -2,7 +2,7 @@
     <div class="search-results">
       <!-- Resultados de canciones -->
       <div v-if="songs.length">
-        <h3>Canciones</h3>
+        <h3 class="my-4">Canciones</h3>
         <div class="results-list song-list">
           <div v-for="song in songs" :key="song.id">
             <SongCard :song="song" />
@@ -19,7 +19,6 @@
           </div>
         </div>
       </div>
-    </div>
   
       <!-- Resultados de álbumes -->
       <div v-if="albums.length">
@@ -30,6 +29,7 @@
           </div>
         </div>
       </div>
+    </div>
   </template>
   
 <script setup>
@@ -52,6 +52,7 @@
 <style scoped>
   .search-results {
     margin-top: 20px;
+    color: white;
   }
   
   .results-list {
