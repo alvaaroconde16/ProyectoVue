@@ -3,7 +3,7 @@
       <img :src="song.album.cover" alt="Portada del álbum" class="album-cover" />
       <div class="song-info">
         <h3>{{ song.title }}</h3>
-        <p>{{ song.artist.name }}</p>
+        <p class="text-secondary">{{ song.artist.name }}</p>
       </div>
       <div class="actions">
         <button class="btn btn-danger" @click="removeSong">
@@ -43,7 +43,8 @@
       display: flex;
       align-items: center;
       padding: 10px;
-      border-bottom: 1px solid #ddd;
+      border-top: 1px solid #363636;
+      color: white;
     }
 
     .album-cover {

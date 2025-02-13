@@ -14,6 +14,7 @@
         {{ song.title }}
         <span class="duration">{{ Math.floor(song.duration / 60) }}:{{ song.duration % 60 < 10 ? "0" : "" }}{{ song.duration % 60 }}</span>
       </h5>
+      
       <p class="song-details text-secondary">{{ song.artist.name }} • {{ song.album.title }}</p>
     </div>
 
