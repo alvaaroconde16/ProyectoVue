@@ -39,6 +39,13 @@
   border-radius: 50%;
   height: auto;
   object-fit: cover;
+  transition: transform 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.artist-image:hover {
+  transform: scale(1.1);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
 }
 
 .card-title {

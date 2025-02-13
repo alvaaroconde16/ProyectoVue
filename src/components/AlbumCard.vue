@@ -32,6 +32,11 @@
   background-color: transparent;
   border: 0;
   color: white;
+  transition: transform 0.3s ease;
+}
+
+.album-card:hover {
+  transform: scale(1.05);
 }
 
 .card-title {

@@ -1,6 +1,6 @@
 <template>
   <div class="container playlist-view">
-    <h1 class="mt-4">Gestión de Playlists</h1>
+    <h2 class="mt-4">Gestión de Playlists</h2>
     <PlaylistManager />
   </div>
 </template>
@@ -10,7 +10,8 @@ import PlaylistManager from "@/components/PlaylistManager.vue";
 </script>
 
 <style scoped>
-h1 {
-  color: #1e90ff;
+h2 {
+  /* color: #1e90ff; */
+  color: white;
 }
 </style>

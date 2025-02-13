@@ -7,7 +7,7 @@
         <div v-for="album in albums.slice(0, 5)" :key="album.id" class="album-item">
           <RouterLink :to="'/album/' + album.id" class="album-link">
             <div class="album-card">
-              <img :src="album.cover_xl" class="album-img" :alt="album.title" />
+              <img :src="album.cover_medium" class="album-img" :alt="album.title" />
               <p class="album-title">{{ album.title }}</p>
               <p class="album-text text-secondary">{{ album.artist.name }}</p>
             </div>
@@ -68,7 +68,6 @@
   
   .album-img {
     width: 100%;
-    object-fit: cover;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
   }
   

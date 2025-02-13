@@ -33,7 +33,7 @@
   </template>
   
 <script setup>
-  import { defineProps, ref, computed } from 'vue';
+  import { computed } from 'vue';
   import SongCard from './SongCard.vue';
   import AlbumCard from './AlbumCard.vue';
   import ArtistCard from './ArtistCard.vue';
@@ -41,12 +41,21 @@
   // Recibe los resultados de la búsqueda
   const props = defineProps({
     results: Array,
+    sorted: Boolean,
   });
   
-  // Computados para separar los resultados en canciones, álbumes y artistas
-  const songs = computed(() => props.results.filter(item => item.type === 'track'));
-  const albums = computed(() => props.results.filter(item => item.type === 'album'));
-  const artists = computed(() => props.results.filter(item => item.type === 'artist'));
+  // Función para ordenar alfabéticamente, si sorted = true, ordenará los resultados por titulo y nombre, de lo contrario, devolverá los elementos como estaban
+  const sortResults = (items) => {
+    return props.sorted
+      ? [...items].sort((a, b) => (a.title || a.name).localeCompare(b.title || b.name))
+      : items;
+  };
+
+  // Computados para separar y ordenar los resultados
+  const songs = computed(() => sortResults(props.results.filter(item => item.type === "track")));
+  const albums = computed(() => sortResults(props.results.filter(item => item.type === "album")));
+  const artists = computed(() => sortResults(props.results.filter(item => item.type === "artist")));
+
 </script>
   
 <style scoped>
@@ -75,10 +84,6 @@
   h3 {
     font-size: 1.5rem;
     margin-bottom: 10px;
-  }
-  
-  .card {
-    cursor: pointer;
   }
 </style>
   

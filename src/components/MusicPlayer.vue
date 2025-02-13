@@ -43,100 +43,96 @@
 </template>
 
 <script setup>
-import { ref, watch, onMounted, onUnmounted } from "vue";
-import { useFavoritesStore } from "@/stores/favorites"; // Store para favoritos
-import { useMusicStore } from "@/stores/music"; // Store global de música
+  import { ref, watch, onMounted } from "vue";
+  import { useFavoritesStore } from "@/stores/favorites"; // Store para favoritos
+  import { useMusicStore } from "@/stores/music"; // Store global de música
 
-const favoritesStore = useFavoritesStore();
-const musicStore = useMusicStore(); // Usamos la store para manejar la canción globalmente
+  const favoritesStore = useFavoritesStore();
+  const musicStore = useMusicStore(); // Usamos la store para manejar la canción globalmente
 
-// Obtiene la canción actual desde la store
-const song = ref(musicStore.currentSong);
+  // Obtiene la canción actual desde la store
+  const song = ref(musicStore.currentSong);
 
-// Comprobamos si la canción está en favoritos
-const toggleFavorite = (song) => {
-if (song && favoritesStore.isFavorite(song.id)) {
-  favoritesStore.removeSong(song.id);
-} else {
-  favoritesStore.addSong(song);
-}
-};
-
-const isFavorite = (id) => favoritesStore.isFavorite(id);
-
-// VARIABLES PARA EL REPRODUCTOR
-const audio = ref(null); 
-const isPlaying = ref(false);
-const currentTime = ref(0);
-const duration = ref(0);
-const volume = ref(1); 
-
-// Función para alternar reproducción/pausa
-const togglePlayback = () => {
-if (audio.value) {
-  if (isPlaying.value) {
-    audio.value.pause();
+  // COMPROBAMOS SI LA CANCIÓN ESTÁ EN FAVORITOS
+  const toggleFavorite = (song) => {
+  if (song && favoritesStore.isFavorite(song.id)) {
+    favoritesStore.removeSong(song.id);
   } else {
-    audio.value.play();
+    favoritesStore.addSong(song);
   }
-  isPlaying.value = !isPlaying.value;
-}
-};
+  };
 
-// Configurar el audio con la canción actual
-const setAudio = (newSong) => {
-if (newSong?.preview) {
+  const isFavorite = (id) => favoritesStore.isFavorite(id);
+
+
+  // VARIABLES PARA EL REPRODUCTOR
+  const audio = ref(null); 
+  const isPlaying = ref(false);
+  const currentTime = ref(0);
+  const duration = ref(0);
+  const volume = ref(1); 
+
+
+  // Función para alternar reproducción/pausa
+  const togglePlayback = () => {
   if (audio.value) {
-    audio.value.pause();
-    audio.value.currentTime = 0;
+    if (isPlaying.value) {
+      audio.value.pause();
+    } else {
+      audio.value.play();
+    }
+    isPlaying.value = !isPlaying.value;
   }
+  };
 
-  audio.value = new Audio(newSong.preview);
-  audio.value.addEventListener("timeupdate", updateTime);
-  audio.value.addEventListener("ended", () => {
-    isPlaying.value = false;
+
+  // Configurar el audio con la canción actual
+  const setAudio = (newSong) => {
+  if (newSong?.preview) {
+    if (audio.value) {
+      audio.value.pause();
+      audio.value.currentTime = 0;
+    }
+    
+    audio.value = new Audio(newSong.preview);
+    audio.value.addEventListener("timeupdate", updateTime);
+    audio.value.addEventListener("ended", () => {
+      isPlaying.value = false;
+    });
+
+    audio.value.play();
+    isPlaying.value = true;
+  }
+  };
+
+  // Observar cambios en la canción actual (cuando cambia en la store)
+  watch(() => musicStore.currentSong, (newSong) => {
+      setAudio(newSong);
+      song.value = newSong;
+  }, { immediate: true }); // Ejecutar al montar el componente
+
+
+  // Actualizar el tiempo actual
+  const updateTime = () => {
+  if (audio.value) {
+    currentTime.value = audio.value.currentTime;
+    duration.value = audio.value.duration;
+  }
+  };
+
+  // Función para actualizar el volumen
+  const updateVolume = () => {
+  if (audio.value) {
+    audio.value.volume = volume.value;
+  }
+  };
+
+  // Configura el audio al principio
+  onMounted(() => {
+  if (musicStore.currentSong) {
+    setAudio(musicStore.currentSong);
+  }
   });
-
-  audio.value.play();
-  isPlaying.value = true;
-}
-};
-
-// Observar cambios en la canción actual (cuando cambia en la store)
-watch(() => musicStore.currentSong, (newSong) => {
-    setAudio(newSong);
-    song.value = newSong;
-}, { immediate: true }); // Ejecutar al montar el componente
-
-// Actualizar el tiempo actual
-const updateTime = () => {
-if (audio.value) {
-  currentTime.value = audio.value.currentTime;
-  duration.value = audio.value.duration;
-}
-};
-
-// Función para actualizar el volumen
-const updateVolume = () => {
-if (audio.value) {
-  audio.value.volume = volume.value;
-}
-};
-
-// Configura el audio al principio
-onMounted(() => {
-if (musicStore.currentSong) {
-  setAudio(musicStore.currentSong);
-}
-});
-
-// Detener la música al desmontar
-onUnmounted(() => {
-if (audio.value) {
-  audio.value.pause();
-  audio.value.currentTime = 0;
-}
-});
 
 </script>
 
@@ -190,14 +186,10 @@ if (audio.value) {
 .btn-favorite {
   background: none;
   border: none;
-  color: #ff6f61;
+  color: #ff6b81;
   font-size: 20px;
   transition: color 0.3s ease;
   margin-left: 15px;
-}
-
-.btn-favorite:hover {
-  color: #ff3838;
 }
 
 /* Sección central ocupa todo el espacio disponible */
@@ -214,7 +206,7 @@ if (audio.value) {
 .controls {
   display: flex;
   justify-content: center;
-  gap: 20px;
+  gap: 10px;
 }
 
 .controls button {
@@ -227,16 +219,17 @@ if (audio.value) {
 }
 
 .controls button:hover {
-  color: #ff6f61;
+  color: #ff6b81;
   transform: scale(1.1);
 }
 
 /* Barra de progreso siempre centrada */
 .progress-bar {
-  width: 40%;
+  width: 50%;
   margin: 10px auto;
   height: 6px;
   border-radius: 5px;
+  background-color: #ff6b81;
 }
 
 /* Sección derecha con tamaño fijo */

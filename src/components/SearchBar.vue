@@ -2,6 +2,11 @@
   <div class="search-container">
     <div class="search-input">
       <input type="text" v-model="searchQuery" @keyup.enter="searchDeezer" placeholder="¿Qué quieres reproducir?" />
+      
+      <button @click="toggleSort">
+        <i class="bi bi-sort-alpha-down"></i> <!-- Ícono de orden alfabético -->
+      </button>
+      
       <button @click="searchDeezer">
         <i class="bi bi-search"></i> <!-- Ícono de búsqueda de Bootstrap -->
       </button>
@@ -11,10 +16,8 @@
 
 <script setup>
   import { ref } from "vue";
-  import { useRouter } from "vue-router"; // Importamos Vue Router
 
   const searchQuery = ref(""); // Estado reactivo para la barra de búsqueda
-  const router = useRouter(); // Obtenemos el enrutador
  
   // Función para realizar la búsqueda
   const searchDeezer = async () => {
@@ -30,7 +33,7 @@
 
       // Emitimos los resultados, combinando los tres tipos
       const results = [
-        ...tracksRes.data.slice(0,18).map(item => ({ ...item, type: "track" })),
+        ...tracksRes.data.slice(0,12).map(item => ({ ...item, type: "track" })),
         ...albumsRes.data.slice(0,5).map(item => ({ ...item, type: "album" })),
         ...artistsRes.data.slice(0,5).map(item => ({ ...item, type: "artist" }))
       ];
@@ -40,6 +43,11 @@
     } catch (error) {
       console.error("Error al buscar en Deezer:", error);
     }
+  };
+
+  // Función para emitir el evento de ordenación
+  const toggleSort = () => {
+    emit("toggleSort");
   };
 
   // Define la función para emitir eventos
@@ -82,6 +90,7 @@
     font-size: 20px;
   }
    .search-input button:hover {
-    color: #000;
+    /* color: #363636; */
+    color: white;
   }
 </style> 

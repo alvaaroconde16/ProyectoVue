@@ -31,7 +31,6 @@
 
 <script setup>
   import { RouterLink } from "vue-router";
-  import SearchBar from "./SearchBar.vue";
 </script>
 
 <style scoped>
@@ -49,7 +48,7 @@
 /* Estilo de los enlaces del menú */
 .navbar-nav .nav-link {
   font-size: 1.1rem;
-  transition: transform 0.3s ease, color 0.3s ease;
+  transition: transform 0.3s ease;
   color: white;
 }
 
@@ -62,12 +61,17 @@
 /* Logo del menú */
 .navbar-brand {
   font-size: 1.5rem;
-  font-weight: bold;
   text-transform: uppercase;
   letter-spacing: 2px;
   background: linear-gradient(135deg, #ff6f61, #d147a3, #1e90ff);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
+  transition: transform 0.3s ease;
+}
+
+.navbar-brand:hover {
+  color: transparent;
+  transform: scale(1.1);
 }
 </style>

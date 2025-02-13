@@ -19,8 +19,8 @@
     <MusicPlayer />
 
     <footer>
-      <div class="footer mt-5">
-        <p>Desarrollado por Álvaro Conde con Vue 3 y Bootstrap 5</p>
+      <div class="footer">
+        <p class="text-white mb-0">Desarrollado por Álvaro Conde con Vue 3 y Bootstrap 5</p>
       </div>
     </footer>
    
@@ -51,6 +51,9 @@ body {
 
 #app {
   background-color: #1f1f1f;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 /* ====== HEADER MODERNO ====== */
@@ -69,15 +72,14 @@ body {
 
 /* ====== CONTENIDO PRINCIPAL ====== */
 .main-content {
-  margin: auto;
+  flex: 1; 
 }
 
 /* ====== FOOTER ESTILIZADO ====== */
 .footer {
   background: rgba(255, 255, 255, 0.1);
   text-align: center;
-  padding: 1rem 0;
-  margin-top: 2rem;
-  font-size: 0.9rem;
+  padding: 30px;
+  font-size: 15px; 
 }
 </style>

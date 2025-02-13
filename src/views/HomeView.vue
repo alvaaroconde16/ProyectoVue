@@ -2,25 +2,20 @@
   <div class="container mt-4">
 
     <!-- Componente SearchBar para búsqueda -->
-    <SearchBar @results="handleResults" />
+    <SearchBar @results="handleResults" @toggleSort="toggleSort" />
 
 
     <!-- Resultados de la búsqueda -->
-    <SearchResults :results="searchResults" />
+    <SearchResults :results="searchResults" :sorted="isSorted" />
 
-
-    <!-- Lista de canciones -->
-    <!-- <div class="list-group my-4" v-if="songs.length > 0">
-      <div class="" v-for="song in songs" :key="song.id">
-        <SongCard :song="song" />
-      </div>
-    </div>  -->
 
     <!-- Carrusel de canciones destacadas -->
     <SongCarousel />
 
+
     <!-- Grid de artistas destacados -->
     <FeaturedArtists />
+
 
     <!-- Grid de álbunes populares -->
     <PopularAlbums />
@@ -35,13 +30,18 @@ import FeaturedArtists from '../components/FeaturedArtists.vue';
 import SearchBar from '../components/SearchBar.vue';
 import SearchResults from '@/components/SearchResults.vue';
 import PopularAlbums from '@/components/PopularAlbums.vue';
-// import SongCard from '@/components/SongCard.vue';
 
-// const songs = ref([]); 
 const searchResults = ref([]);
+const isSorted = ref(false); // Estado para controlar la ordenación
 
+// Maneja los resultados emitidos desde SearchBar
 const handleResults = (data) => {
-  searchResults.value = data; // Mostramos hasta 10 resultados
+  searchResults.value = data; // Guardamos los resultados para mostrarlos
+};
+
+// Alterna el estado de ordenación
+const toggleSort = () => {
+  isSorted.value = !isSorted.value; // Cambia el estado de la ordenación
 };
 
 </script>

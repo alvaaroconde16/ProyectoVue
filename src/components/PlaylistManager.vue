@@ -27,6 +27,7 @@
   /* Agregar estilos para la playlist */
   .playlist-manager {
     padding: 20px;
+    color: white;
   }
   
   .playlist {

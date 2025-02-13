@@ -1,12 +1,12 @@
 <template>
     <div class="container">
-      <h1 class="text-center my-4">Búsqueda de canciones en Deezer</h1>
+      <h2 class="text-center my-4">Búsqueda de canciones en Deezer</h2>
       <!-- Componente hijo -->
-      <SearchBar @results="handleResults" />
+      <SearchBar @results="handleResults" @toggleSort="toggleSort"/>
 
 
       <!-- Resultados de la búsqueda -->
-      <SearchResults :results="searchResults" />
+      <SearchResults :results="searchResults" :sorted="isSorted" />
 
 
       <!-- Lista de canciones -->
@@ -29,17 +29,24 @@
     import SearchBar from "../components/SearchBar.vue"; // Importa el componente hijo
     import SearchResults from '@/components/SearchResults.vue';
     
-    const searchResults = ref([]); // Estado para almacenar los resultados de la búsqueda
+    const searchResults = ref([]);
+    const isSorted = ref(false); // Estado para controlar la ordenación
 
-    // Maneja los resultados emitidos por el componente hijo
+    // Maneja los resultados emitidos desde SearchBar
     const handleResults = (data) => {
-      searchResults.value = data; // Actualiza la lista de canciones
+      searchResults.value = data; // Guardamos los resultados para mostrarlos
+    };
+
+    // Alterna el estado de ordenación
+    const toggleSort = () => {
+      isSorted.value = !isSorted.value; // Cambia el estado de la ordenación
     };
   </script>
 
 <style scoped>
-h1 {
-  color: #1e90ff;
+h2 {
+  /* color: #1e90ff; */
+  color: white;
 }
 
 table td {
