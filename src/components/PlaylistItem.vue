@@ -84,10 +84,11 @@
   font-size: 17px;
   padding: 8px 12px;
   border-radius: 5px;
+  transition: transform 0.2s ease;
 }
 
 .actions button:hover {
-  background-color: #424242;
+  transform: scale(1.07);
 }
 
 .actions .btn-danger {
@@ -95,7 +96,7 @@
 }
 
 .actions .btn-primary {
-  color: #ff6b81;
+  color: #4cd964;
 }
 
 </style>

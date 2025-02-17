@@ -14,8 +14,6 @@
 </template>
 
 <script setup>
-  import { defineProps } from "vue";
-
   // Propiedad 'artist' que recibe la información del artista
   const props = defineProps({
     artist: Object,

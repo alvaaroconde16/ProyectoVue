@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+
     <!-- HEADER -->
     <header class="header">
       <div class="container text-center">
@@ -28,8 +29,8 @@
 </template>
 
 <script setup>
-import Menu from "./components/menu.vue";
-import MusicPlayer from "./components/MusicPlayer.vue";
+  import Menu from "./components/menu.vue";
+  import MusicPlayer from "./components/MusicPlayer.vue";
 </script>
 
 <style lang="scss">
