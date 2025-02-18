@@ -23,8 +23,8 @@
       <div class="albums-section mt-5">
         <h2 class="mb-4">Álbumes</h2>
         <div class="row row-cols-1 row-cols-md-5 g-4">
-          <AlbumCard v-for="album in albums.slice(0,8)" :key="album.id" :album="album" />
-        </div>
+            <AlbumCard v-for="album in albums.slice(0,8)" :key="album.id" :album="album" />
+          </div>
       </div>
   
     </div>

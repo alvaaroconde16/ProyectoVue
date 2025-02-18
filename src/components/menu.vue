@@ -1,43 +1,45 @@
 <template>
   <nav class="navbar navbar-expand-lg shadow-sm">
-    <div class="container">
-      <!-- LOGO -->
-      <router-link class="navbar-brand fw-bold" to="/">
-        MusicApp
-      </router-link>
+    <div class="container d-flex justify-content-between align-items-center">
+      <!-- LOGO y Menú de navegación -->
+      <div class="d-flex align-items-center">
+        <router-link class="navbar-brand fw-bold" to="/">
+          MusicApp
+        </router-link>
 
-      <!-- Menú de navegación -->
-      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-        <ul class="navbar-nav gap-3">
-          <li class="nav-item">
-            <router-link class="nav-link" to="/">Home</router-link>
-          </li>
-          <li class="nav-item">
-            <router-link class="nav-link" to="/playlists">Playlists</router-link>
-          </li>
-          <li class="nav-item">
-            <router-link class="nav-link" to="/search2">Buscador</router-link>
-          </li>
-        </ul>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav gap-3">
+            <li class="nav-item">
+              <router-link class="nav-link" to="/">Home</router-link>
+            </li>
+            <li class="nav-item">
+              <router-link class="nav-link" to="/playlists">Playlists</router-link>
+            </li>
+            <li class="nav-item">
+              <router-link class="nav-link" to="/search2">Buscador</router-link>
+            </li>
+          </ul>
+        </div>
       </div>
 
-      <!-- Usuario logueado -->
-      <div v-if="usuario" class="d-flex align-items-center">
-        <img :src="usuario.avatar" alt="Avatar" class="avatar" />
-        <span class="text-white ms-2">Hola, {{ usuario.nombre }}!</span>
-        <button @click="cerrarSesion" class="btn btn-sm btn-danger ms-3">Cerrar Sesión</button>
-      </div>
+      <!-- Usuario logueado o botones de Login/Registro -->
+      <div class="d-flex align-items-center">
+        <div v-if="usuario" class="d-flex align-items-center">
+          <img :src="usuario.avatar" alt="Avatar" class="avatar" />
+          <span class="text-white ms-2">Hola, {{ usuario.nombre }}!</span>
+          <button @click="cerrarSesion" class="btn btn-sm btn-danger ms-3">Cerrar Sesión</button>
+        </div>
 
-      <!-- Botones de Login y Registro -->
-      <div v-if="!usuario" class="d-flex">
-        <button @click="abrirRegistro" class="btn btn-success me-2">Registrarse</button>
-        <button @click="abrirLogin" class="btn btn-primary">Login</button>
+        <div v-if="!usuario" class="d-flex">
+          <button @click="abrirRegistro" class="btn btn-success me-2">Registrarse</button>
+          <button @click="abrirLogin" class="btn btn-primary">Login</button>
+        </div>
       </div>
-
-      <!-- Modales -->
-      <WelcomeModal ref="welcomeModal" @usuarioRegistrado="usuario = $event" />
-      <LoginModal ref="loginModal" @usuarioLogueado="usuario = $event" />
     </div>
+
+    <!-- Modales -->
+    <WelcomeModal ref="welcomeModal" @usuarioRegistrado="usuario = $event" />
+    <LoginModal ref="loginModal" @usuarioLogueado="usuario = $event" />
   </nav>
 </template>
 
@@ -55,14 +57,11 @@ onMounted(() => {
   if (usuarioGuardado) {
     const datosUsuario = JSON.parse(usuarioGuardado);
     if (datosUsuario.sesionIniciada === true) {
-      // Si la sesión está activa, muestra al usuario
       usuario.value = datosUsuario;
     } else {
-      // Si la sesión no está activa, muestra el modal de login
       loginModal.value.abrirModal();
     }
   } else {
-    // Si no hay usuario guardado, muestra el modal de registro
     welcomeModal.value.abrirModal();
   }
 });
@@ -115,6 +114,10 @@ const cerrarSesion = () => {
 
 .navbar-brand:hover {
   transform: scale(1.1);
+  background: linear-gradient(135deg, #ff6f61, #d147a3, #1e90ff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
 
 .avatar {
