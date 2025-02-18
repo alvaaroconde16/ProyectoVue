@@ -7,6 +7,8 @@
           MusicApp
         </router-link>
 
+        <p class="separacion text-white">|</p>
+
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav gap-3">
             <li class="nav-item">
@@ -125,5 +127,14 @@ const cerrarSesion = () => {
   height: 40px;
   border-radius: 50%;
   object-fit: cover;
+}
+
+.separacion {
+  font-size: 1.6rem;
+  color: white;
+  padding: 0;
+  margin: 0;
+  margin-right: 15px;
+  margin-left: 2px;
 }
 </style>

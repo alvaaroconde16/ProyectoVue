@@ -22,7 +22,7 @@
   
       <!-- Resultados de álbumes -->
       <div v-if="albums.length">
-        <h3 class="mb-4">Álbumes</h3>
+        <h3 class="my-4">Álbumes</h3>
         <div class="results-list album-list">
           <div v-for="album in albums" :key="album.id">
             <AlbumCard :album="album" />

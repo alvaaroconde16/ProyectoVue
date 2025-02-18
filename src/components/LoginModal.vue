@@ -1,6 +1,6 @@
 <template>
     <div v-if="mostrarModal" class="modal-overlay">
-      <div class="modal-content">
+      <div class="modal-content text-white">
         <h2>Iniciar Sesión</h2>
         <p>Ingresa tu nombre de usuario y contraseña.</p>
   
@@ -60,36 +60,79 @@
   </script>
   
   <style scoped>
-  /* Modal de inicio de sesión */
-  .modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.6);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1100;
-  }
-  
-  .modal-content {
-    background: white;
-    padding: 20px;
-    border-radius: 10px;
-    text-align: center;
-    width: 350px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-  }
-  
-  button {
-    margin-top: 10px;
-  }
-  
-  .error {
-    color: red;
-    margin-top: 10px;
-  }
+ .modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1100;
+}
+
+.modal-content {
+  background: #2c2c2c;
+  padding: 30px;
+  border-radius: 12px;
+  text-align: center;
+  width: 400px;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.4);
+}
+
+h2 {
+  font-size: 1.8rem;
+  color: #fff;
+}
+
+input {
+  width: 100%;
+  padding: 12px;
+  margin-top: 10px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  background: #333;
+  color: white;
+}
+
+input::placeholder {
+  color: #aaa;
+}
+
+button {
+  padding: 10px 15px;
+  font-size: 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  width: 100%;
+}
+
+button.btn-primary {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  margin-top: 15px;
+}
+
+button.btn-primary:hover {
+  background-color: #0056b3;
+}
+
+button.btn-secondary {
+  color: white;
+  background-color: #495057;
+  border: none;
+}
+
+button.btn-secondary:hover {
+  background-color: #343a40;
+}
+
+.error {
+  color: red;
+  margin-top: 10px;
+}
   </style>
   

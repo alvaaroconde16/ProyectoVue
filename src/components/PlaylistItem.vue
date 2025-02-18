@@ -96,7 +96,7 @@
 }
 
 .actions .btn-primary {
-  color: #4cd964;
+  color: #218ffd;
 }
 
 </style>

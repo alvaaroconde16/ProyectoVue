@@ -20,7 +20,7 @@
     <MusicPlayer />
 
     <footer>
-      <div class="footer">
+      <div class="footer mt-5">
         <p class="text-white mb-0">Desarrollado por Álvaro Conde con Vue 3 y Bootstrap 5</p>
       </div>
     </footer>
@@ -60,15 +60,18 @@ body {
 /* ====== HEADER MODERNO ====== */
 .header {
   background: linear-gradient(105deg, #ff6f61, #d147a3, #1e90ff);
-  padding: 1.5rem 0;
+  padding: 21px;
   text-align: center;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
   color: white;
+  font-family: "Poppins", sans-serif;
 }
 
 .header h1 {
   font-size: 2rem;
   font-weight: bold;
+  text-transform: uppercase;
+  text-shadow: 4px 2px 4px rgba(0, 0, 0, 0.4);
 }
 
 /* ====== CONTENIDO PRINCIPAL ====== */
