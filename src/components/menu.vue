@@ -28,63 +28,59 @@
       <div class="d-flex align-items-center">
         <div v-if="usuario" class="d-flex align-items-center">
           <img :src="usuario.avatar" alt="Avatar" class="avatar" />
-          <span class="text-white ms-2">Hola, {{ usuario.nombre }}!</span>
-          <button @click="cerrarSesion" class="btn btn-sm btn-danger ms-3">Cerrar Sesión</button>
+          
+          <!-- Menú desplegable con v-if -->
+          <button @click="cerrarSesion" class="btn btn-danger ms-4"><i class="bi bi-box-arrow-right me-2"></i>Salir</button>
         </div>
 
         <div v-if="!usuario" class="d-flex">
-          <button @click="abrirRegistro" class="btn btn-success me-2">Registrarse</button>
-          <button @click="abrirLogin" class="btn btn-primary">Login</button>
+          <button @click="abrirLogin" class="btn btn-primary">Iniciar Sesión</button>
         </div>
       </div>
     </div>
 
     <!-- Modales -->
-    <WelcomeModal ref="welcomeModal" @usuarioRegistrado="usuario = $event" />
     <LoginModal ref="loginModal" @usuarioLogueado="usuario = $event" />
   </nav>
 </template>
 
 <script setup>
-import { ref, onMounted } from "vue";
-import WelcomeModal from "@/components/WelcomeModal.vue";
-import LoginModal from "@/components/LoginModal.vue";
+  import { ref, onMounted } from "vue";
+  import LoginModal from "@/components/LoginModal.vue";
 
-const usuario = ref(null);
-const welcomeModal = ref(null);
-const loginModal = ref(null);
+  const usuario = ref(null);
+  const menuVisible = ref(false);  // Variable para manejar la visibilidad del menú
+  const loginModal = ref(null);
 
-onMounted(() => {
-  const usuarioGuardado = localStorage.getItem("usuario");
-  if (usuarioGuardado) {
-    const datosUsuario = JSON.parse(usuarioGuardado);
-    if (datosUsuario.sesionIniciada === true) {
-      usuario.value = datosUsuario;
+  onMounted(() => {
+    const usuarioGuardado = localStorage.getItem("usuarios");
+    if (usuarioGuardado) {
+      const datosUsuario = JSON.parse(usuarioGuardado);
+      if (datosUsuario.sesionIniciada === true) {
+        usuario.value = datosUsuario;
+      } else {
+        loginModal.value.abrirModal();
+      }
     } else {
       loginModal.value.abrirModal();
     }
-  } else {
-    welcomeModal.value.abrirModal();
-  }
-});
+  });
 
-const abrirRegistro = () => {
-  welcomeModal.value.abrirModal();
-};
+  const abrirLogin = () => {
+    loginModal.value.abrirModal();
+  };
 
-const abrirLogin = () => {
-  loginModal.value.abrirModal();
-};
+  const cerrarSesion = () => {
+    let usuarioGuardado = JSON.parse(localStorage.getItem("usuarios"));
+    if (usuarioGuardado) {
+      usuarioGuardado.sesionIniciada = false;
+      localStorage.setItem("usuarios", JSON.stringify(usuarioGuardado));
+    }
+    usuario.value = null;
+  };
 
-const cerrarSesion = () => {
-  let usuarioGuardado = JSON.parse(localStorage.getItem("usuario"));
-  if (usuarioGuardado) {
-    usuarioGuardado.sesionIniciada = false;
-    localStorage.setItem("usuario", JSON.stringify(usuarioGuardado));
-  }
-  usuario.value = null;
-};
 </script>
+
 
 <style scoped>
 .navbar {
@@ -127,6 +123,7 @@ const cerrarSesion = () => {
   height: 40px;
   border-radius: 50%;
   object-fit: cover;
+  cursor: pointer;
 }
 
 .separacion {
