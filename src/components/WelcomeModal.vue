@@ -83,28 +83,16 @@
 
     // Agregar el nuevo usuario al arreglo
     usuarios.push(nuevoUsuario);
-    
-    // Guardar el array de usuarios en localStorage
     localStorage.setItem('usuarios', JSON.stringify(usuarios));  // Aquí también cambiamos la clave a 'usuarios'
+
+    localStorage.setItem("usuarioLogueado", JSON.stringify(nuevoUsuario));  // Guardar solo el usuario logueado en localStorage para la persistencia
     
     // Emitir el evento para notificar al componente padre
     emit("usuarioRegistrado", nuevoUsuario);
+    emit("usuarioLogueado", nuevoUsuario);  // Emitir evento para iniciar sesión automáticamente
 
-    // Iniciar sesion y cerrar el modal
-    iniciarSesion(nuevoUsuario);
+    window.location.reload();  // Recargar la página para mostrar el usuario logueado
     cerrarModal();
-  };
-
-  // Función para iniciar sesión automáticamente
-  const iniciarSesion = (usuario) => {
-    const usuariosGuardados = JSON.parse(localStorage.getItem("usuarios")) || [];
-    const usuarioEncontrado = usuariosGuardados.find(usuarioGuardado => usuarioGuardado.nombre === usuario.nombre);
-
-    if (usuarioEncontrado) {
-      usuarioEncontrado.sesionIniciada = true; // Asegúrate de marcar la sesión como iniciada
-      localStorage.setItem("usuarios", JSON.stringify(usuariosGuardados));
-      emit("usuarioLogueado", usuarioEncontrado);  // Emitir el evento para actualizar el estado del padre
-    }
   };
   
   defineExpose({ abrirModal });
@@ -128,7 +116,7 @@
   
   .modal-content {
     background: #2c2c2c;
-    padding: 30px;
+    padding: 40px 60px;
     border-radius: 12px;
     text-align: center;
     width: 500px;

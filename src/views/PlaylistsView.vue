@@ -1,6 +1,6 @@
 <template>
   <div class="container playlist-view">
-    <h2 class="mt-4">Gestión de Playlists</h2>
+    <h2 class="mt-4">Gestión de Playlist</h2>
     <PlaylistManager />
   </div>
 </template>

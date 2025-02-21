@@ -24,11 +24,11 @@
       </p>
     </div>
   </div>
-  <WelcomeModal ref="welcomeModal" @usuarioRegistrado="usuario = $event" @usuarioLogueado="usuarioLogueado = $event" />
+  <WelcomeModal ref="welcomeModal" @usuarioRegistrado="usuario = $event" />
 </template>
   
 <script setup>
-  import { ref, defineEmits } from 'vue';
+  import { ref, defineEmits, onMounted } from 'vue';
   import WelcomeModal from './WelcomeModal.vue';
   
   const mostrarModal = ref(false);
@@ -56,11 +56,6 @@
   
   const iniciarSesion = () => {
     const usuariosGuardados = JSON.parse(localStorage.getItem("usuarios")) || [];
-    
-    if (usuariosGuardados.length === 0) {
-      errorMensaje.value = "No hay usuarios registrados. Regístrate primero.";
-      return;
-    }
 
     // Buscar el usuario en la lista de usuarios guardados
     const usuarioEncontrado = usuariosGuardados.find(usuario => usuario.nombre === nombreLogin.value);
@@ -71,17 +66,29 @@
     }
 
     if (usuarioEncontrado.contraseña === contraseñaLogin.value) {
-      // Marcar sesión iniciada
       usuarioEncontrado.sesionIniciada = true;
-      localStorage.setItem("usuarios", JSON.stringify(usuariosGuardados));  // Actualizar usuarios en localStorage
+      localStorage.setItem("usuarios", JSON.stringify(usuariosGuardados));  
+
+      // Guardar solo el usuario logueado en localStorage para la persistencia
+      localStorage.setItem("usuarioLogueado", JSON.stringify(usuarioEncontrado));
+
       emit("usuarioLogueado", usuarioEncontrado);
-      
       cerrarModal();
     } else {
       errorMensaje.value = "Usuario o contraseña incorrecta.";
     }
-
   };
+
+  // Verificar si hay un usuario logueado al cargar la página
+  onMounted(() => {
+    const usuarioLogueado = JSON.parse(localStorage.getItem("usuarioLogueado"));
+    if (usuarioLogueado && usuarioLogueado.sesionIniciada) {
+      emit("usuarioLogueado", usuarioLogueado); // Emitimos el usuario logueado al padre
+    } else {
+      abrirModal(); // Si no hay usuario logueado, abrir el modal
+    }
+  });
+
   
   defineExpose({ abrirModal });
 </script>
@@ -102,7 +109,7 @@
 
 .modal-content {
   background: #2c2c2c;
-  padding: 30px;
+  padding: 40px 60px;
   border-radius: 12px;
   text-align: center;
   width: 500px;

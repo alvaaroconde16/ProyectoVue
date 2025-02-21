@@ -71,7 +71,6 @@ body {
   font-size: 2rem;
   font-weight: bold;
   text-transform: uppercase;
-  text-shadow: 4px 2px 4px rgba(0, 0, 0, 0.4);
 }
 
 /* ====== CONTENIDO PRINCIPAL ====== */
